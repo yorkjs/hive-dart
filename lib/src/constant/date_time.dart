@@ -1,0 +1,8 @@
+/// 年月日 时分秒：2020-10-01 10:00:00
+const DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND = 'yyyy-MM-dd HH:mm:ss';
+
+/// 年月日 时分：2020-10-01 10:00
+const DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE = 'yyyy-MM-dd HH:mm';
+
+/// 月日 时分：10-01 10:00
+const DATE_TIME_MONTH_DATE_HOUR_MINUTE = 'MM-dd HH:mm';

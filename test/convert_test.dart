@@ -1,0 +1,59 @@
+import 'package:hive_dart/src/convert/money.dart';
+import 'package:hive_dart/src/convert/rate.dart';
+import 'package:hive_dart/src/convert/weight.dart';
+import 'package:test/test.dart';
+
+void main() {
+
+  group('convert', () {
+
+    test('convertMoney', () {
+      expect(moneyToDisplay(100), 1);
+      expect(moneyToBackend(1.01), 101);
+    });
+
+    test('convertRate', () {
+      expect(rateToDisplay(1015), 10.15);
+      expect(rateToBackend(10.15), 1015);
+      expect(calculateRate(10, 100), 1000);
+      expect(calculateRate(5, 1), 50000);
+      expect(calculateRate(5, 5), 10000);
+      expect(calculateRate(5, 10), 5000);
+      expect(calculateRate(5, 100), 500);
+      expect(calculateRate(5, 1000), 50);
+      expect(calculateRate(5, 10000), 5);
+    });
+
+    test('convertWeight', () {
+
+      expect(weightToG(1), 0.001);
+      expect(weightToG(10), 0.01);
+      expect(weightToG(100), 0.1);
+      expect(weightToG(1000), 1);
+      expect(weightToG(10000), 10);
+
+      expect(weightToKG(1), 0.000001);
+      expect(weightToKG(10), 0.00001);
+      expect(weightToKG(100), 0.0001);
+      expect(weightToKG(1000), 0.001);
+      expect(weightToKG(10000), 0.01);
+      expect(weightToKG(100000), 0.1);
+      expect(weightToKG(1000000), 1);
+      expect(weightToKG(10000000), 10);
+
+
+      expect(weightGToBackend(0.001), 1);
+      expect(weightGToBackend(0.01), 10);
+      expect(weightGToBackend(0.1), 100);
+      expect(weightGToBackend(1), 1000);
+      expect(weightGToBackend(10), 10000);
+
+      expect(weightKGToBackend(0.001), 1000);
+      expect(weightKGToBackend(0.01), 10000);
+      expect(weightKGToBackend(0.1), 100000);
+      expect(weightKGToBackend(1), 1000000);
+      expect(weightKGToBackend(10), 10000000);
+    });
+
+  });
+}
