@@ -1,3 +1,4 @@
+import 'package:hive_dart/src/constant/money.dart';
 import 'package:hive_dart/src/convert/money.dart';
 import 'package:hive_dart/src/convert/rate.dart';
 import 'package:hive_dart/src/convert/weight.dart';
@@ -9,7 +10,13 @@ void main() {
 
     test('convertMoney', () {
       expect(moneyToDisplay(100), 1);
+      expect(moneyToDisplay(100, unit: MONEY_YUAN_TO_CENT), 1);
+      expect(moneyToDisplay(1000000, unit: MONEY_TEN_THOUSAND_YUAN_TO_CENT), 1);
+      expect(moneyToDisplay(1100000, unit: MONEY_TEN_THOUSAND_YUAN_TO_CENT), 1.1);
+
       expect(moneyToBackend(1.01), 101);
+      expect(moneyToBackend(1.01, unit: MONEY_YUAN_TO_CENT), 101);
+      expect(moneyToBackend(1.01, unit: MONEY_TEN_THOUSAND_YUAN_TO_CENT), 1010000);
     });
 
     test('convertRate', () {

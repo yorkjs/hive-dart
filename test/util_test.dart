@@ -84,10 +84,32 @@ void main() {
 
     test('date_day', () {
 
-      final ts = DateTime.parse('2020-10-10 10:01:01').millisecondsSinceEpoch;
+      var ts = DateTime.parse('2020-10-10 10:01:01').millisecondsSinceEpoch;
 
       expect(formatDateTime(startOfDay(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2020-10-10 00:00:00');
+      expect(formatDateTime(startOfPrevDay(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2020-10-09 00:00:00');
+      expect(formatDateTime(startOfNextDay(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2020-10-11 00:00:00');
       expect(formatDateTime(endOfDay(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2020-10-10 23:59:59');
+
+      ts = DateTime.parse('2020-04-01 10:01:01').millisecondsSinceEpoch;
+
+      expect(formatDateTime(startOfPrevDay(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2020-03-31 00:00:00');
+      expect(formatDateTime(startOfNextDay(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2020-04-02 00:00:00');
+
+      ts = DateTime.parse('2020-01-01 10:01:01').millisecondsSinceEpoch;
+
+      expect(formatDateTime(startOfPrevDay(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2019-12-31 00:00:00');
+      expect(formatDateTime(startOfNextDay(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2020-01-02 00:00:00');
+
+      ts = DateTime.parse('2024-03-01 10:01:01').millisecondsSinceEpoch;
+
+      expect(formatDateTime(startOfPrevDay(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2024-02-29 00:00:00');
+      expect(formatDateTime(startOfNextDay(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2024-03-02 00:00:00');
+
+      ts = DateTime.parse('2025-03-01 10:01:01').millisecondsSinceEpoch;
+
+      expect(formatDateTime(startOfPrevDay(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2025-02-28 00:00:00');
+      expect(formatDateTime(startOfNextDay(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2025-03-02 00:00:00');
 
     });
 
@@ -96,6 +118,8 @@ void main() {
       var ts = DateTime.parse('2025-07-27 10:01:01').millisecondsSinceEpoch;
 
       expect(formatDateTime(startOfWeek(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2025-07-27 00:00:00');
+      expect(formatDateTime(startOfPrevWeek(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2025-07-20 00:00:00');
+      expect(formatDateTime(startOfNextWeek(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2025-08-03 00:00:00');
       expect(formatDateTime(endOfWeek(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2025-08-02 23:59:59');
 
       ts = DateTime.parse('2025-07-29 10:01:01').millisecondsSinceEpoch;
@@ -120,22 +144,44 @@ void main() {
       var ts = DateTime.parse('2025-02-10 10:01:01').millisecondsSinceEpoch;
 
       expect(formatDateTime(startOfMonth(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2025-02-01 00:00:00');
+      expect(formatDateTime(startOfPrevMonth(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2025-01-01 00:00:00');
+      expect(formatDateTime(startOfNextMonth(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2025-03-01 00:00:00');
       expect(formatDateTime(endOfMonth(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2025-02-28 23:59:59');
 
       ts = DateTime.parse('2025-06-29 10:01:01').millisecondsSinceEpoch;
 
       expect(formatDateTime(startOfMonth(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2025-06-01 00:00:00');
+      expect(formatDateTime(startOfPrevMonth(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2025-05-01 00:00:00');
+      expect(formatDateTime(startOfNextMonth(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2025-07-01 00:00:00');
       expect(formatDateTime(endOfMonth(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2025-06-30 23:59:59');
 
       ts = DateTime.parse('2025-07-29 10:01:01').millisecondsSinceEpoch;
 
       expect(formatDateTime(startOfMonth(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2025-07-01 00:00:00');
+      expect(formatDateTime(startOfPrevMonth(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2025-06-01 00:00:00');
+      expect(formatDateTime(startOfNextMonth(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2025-08-01 00:00:00');
       expect(formatDateTime(endOfMonth(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2025-07-31 23:59:59');
 
       ts = DateTime.parse('2025-12-19 10:01:01').millisecondsSinceEpoch;
 
       expect(formatDateTime(startOfMonth(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2025-12-01 00:00:00');
+      expect(formatDateTime(startOfPrevMonth(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2025-11-01 00:00:00');
+      expect(formatDateTime(startOfNextMonth(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2026-01-01 00:00:00');
       expect(formatDateTime(endOfMonth(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2025-12-31 23:59:59');
+
+      ts = DateTime.parse('2025-04-19 10:01:01').millisecondsSinceEpoch;
+
+      expect(formatDateTime(startOfMonth(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2025-04-01 00:00:00');
+      expect(formatDateTime(startOfPrevMonth(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2025-03-01 00:00:00');
+      expect(formatDateTime(startOfNextMonth(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2025-05-01 00:00:00');
+      expect(formatDateTime(endOfMonth(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2025-04-30 23:59:59');
+
+      ts = DateTime.parse('2025-01-19 10:01:01').millisecondsSinceEpoch;
+
+      expect(formatDateTime(startOfMonth(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2025-01-01 00:00:00');
+      expect(formatDateTime(startOfPrevMonth(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2024-12-01 00:00:00');
+      expect(formatDateTime(startOfNextMonth(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2025-02-01 00:00:00');
+      expect(formatDateTime(endOfMonth(ts), DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND), '2025-01-31 23:59:59');
 
     });
   });
