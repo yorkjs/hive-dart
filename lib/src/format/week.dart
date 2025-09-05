@@ -1,5 +1,5 @@
-import 'package:hive_dart/src/constant/millisecond.dart';
-import 'package:hive_dart/src/format/date.dart';
+import '../constant/millisecond.dart';
+import '../format/date.dart';
 
 /// 把时间戳格式化为 周开始 ~ 周结束 格式
 String formatWeek(int timestamp) {

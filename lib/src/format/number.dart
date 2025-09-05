@@ -1,7 +1,12 @@
 
-import 'package:hive_dart/src/util/number.dart';
+import '../util/number.dart';
 
 String formatNumberWithComma(num value, {int decimals = 0}) {
+  final isNegative = value < 0;
+  // 先转成正数，避免 - 号影响格式化流程
+  if (isNegative) {
+    value = -value;
+  }
   final newValue = decimals >= 0 ? truncateNumber(value, decimals: decimals) : value.toString();
 
   final parts = newValue.split('.');
@@ -33,5 +38,5 @@ String formatNumberWithComma(num value, {int decimals = 0}) {
     result += '.${'0' * decimals}';
   }
 
-  return result;
+    return isNegative ? '-$result' : result;
 }

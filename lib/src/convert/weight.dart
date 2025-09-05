@@ -1,5 +1,5 @@
 
-import 'package:hive_dart/src/util/number.dart';
+import '../util/number.dart';
 
 /// 毫克 转换为 克
 num weightToG(int value) {

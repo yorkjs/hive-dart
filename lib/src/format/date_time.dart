@@ -1,5 +1,5 @@
 import 'package:intl/intl.dart';
-import 'package:hive_dart/src/constant/date_time.dart';
+import '../constant/date_time.dart';
 
 /// 把时间戳格式化为 2020-10-01 10:00 格式
 String formatDateTime(int timestamp, [String format = DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE]) {

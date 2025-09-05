@@ -1,6 +1,6 @@
 
-import 'package:hive_dart/src/constant/money.dart';
-import 'package:hive_dart/src/util/number.dart';
+import '../constant/money.dart';
+import '../util/number.dart';
 
 /// 把金额转换为前端显示所用的格式
 num moneyToDisplay(int value, {int unit = MONEY_YUAN_TO_CENT}) {

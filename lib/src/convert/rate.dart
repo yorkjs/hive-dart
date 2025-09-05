@@ -1,5 +1,5 @@
 
-import 'package:hive_dart/src/util/number.dart';
+import '../util/number.dart';
 
 /// 万分比 转换为 百分比
 num rateToDisplay(int value) {
