@@ -11,3 +11,7 @@
 
 - 新增 formatArea
 - 修复 formatNumberWithComma 参数为负数时的格式化错误
+
+## 0.0.4
+
+- 调整 formatDateTime 方法签名

@@ -1,3 +1,6 @@
+import 'package:json_annotation/json_annotation.dart';
+part 'area.g.dart';
+
 final Map<String, String> provinceMap = {
   '北京市': '北京',
   '上海市': '上海',
@@ -69,22 +72,46 @@ final Map<String, String> cityMap = {
   '黔南布依族苗族自治州': '黔南',
 };
 
-// Node 类
+@JsonSerializable()
 class Node {
-  final int id;
-  final String name;
+  @JsonKey(name: "id")
+  int id;
+  @JsonKey(name: "name")
+  String name;
 
-  Node({required this.id, required this.name});
+  Node({
+    required this.id,
+    required this.name,
+  });
+
+  factory Node.fromJson(Map<String, dynamic> json) =>
+      _$NodeFromJson(json);
+
+  Map<String, dynamic> toJson() => _$NodeToJson(this);
 }
 
-// Area 类
+@JsonSerializable()
 class Area {
-  final Node? country;
-  final Node? province;
-  final Node? city;
-  final Node? district;
+  @JsonKey(name: "country")
+  Node? country;
+  @JsonKey(name: "province")
+  Node? province;
+  @JsonKey(name: "city")
+  Node? city;
+  @JsonKey(name: "district")
+  Node? district;
 
-  Area({this.country, this.province, this.city, this.district});
+  Area({
+    this.country,
+    this.province,
+    this.city,
+    this.district,
+  });
+
+  factory Area.fromJson(Map<String, dynamic> json) =>
+      _$AreaFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AreaToJson(this);
 }
 
 // 格式化地区信息
@@ -103,7 +130,7 @@ String formatArea(Area area, {bool simplify = true}) {
     prevItem = item;
   }
 
-  bool isChina = false;
+  var isChina = false;
   final isSimplify = simplify;
   final separator = isSimplify ? ' ' : '';
 
