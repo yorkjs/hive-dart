@@ -73,49 +73,49 @@ final Map<String, String> cityMap = {
 };
 
 @JsonSerializable()
-class Node {
+class NodeModel {
   @JsonKey(name: "id")
   int id;
   @JsonKey(name: "name")
   String name;
 
-  Node({
+  NodeModel({
     required this.id,
     required this.name,
   });
 
-  factory Node.fromJson(Map<String, dynamic> json) =>
-      _$NodeFromJson(json);
+  factory NodeModel.fromJson(Map<String, dynamic> json) =>
+      _$NodeModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$NodeToJson(this);
+  Map<String, dynamic> toJson() => _$NodeModelToJson(this);
 }
 
 @JsonSerializable()
-class Area {
+class AreaModel {
   @JsonKey(name: "country")
-  Node? country;
+  NodeModel? country;
   @JsonKey(name: "province")
-  Node? province;
+  NodeModel? province;
   @JsonKey(name: "city")
-  Node? city;
+  NodeModel? city;
   @JsonKey(name: "district")
-  Node? district;
+  NodeModel? district;
 
-  Area({
+  AreaModel({
     this.country,
     this.province,
     this.city,
     this.district,
   });
 
-  factory Area.fromJson(Map<String, dynamic> json) =>
-      _$AreaFromJson(json);
+  factory AreaModel.fromJson(Map<String, dynamic> json) =>
+      _$AreaModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$AreaToJson(this);
+  Map<String, dynamic> toJson() => _$AreaModelToJson(this);
 }
 
 // 格式化地区信息
-String formatArea(Area area, {bool simplify = true}) {
+String formatArea(AreaModel area, {bool simplify = true}) {
 
   final country = area.country;
   final province = area.province;

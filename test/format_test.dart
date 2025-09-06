@@ -10,44 +10,44 @@ void main() {
 
   group('format', () {
     test('formatArea', () {
-      expect(formatArea(Area(
-        country: Node(id: 0, name: '中国'),
-        province: Node(id: 0, name: '北京市'),
-        city: Node(id: 0, name: '市辖区'),
-        district: Node(id: 0, name: '海淀区'),
+      expect(formatArea(AreaModel(
+        country: NodeModel(id: 0, name: '中国'),
+        province: NodeModel(id: 0, name: '北京市'),
+        city: NodeModel(id: 0, name: '市辖区'),
+        district: NodeModel(id: 0, name: '海淀区'),
       )), '北京 海淀区');
 
-      expect(formatArea(Area(
-        country: Node(id: 0, name: '中国'),
-        province: Node(id: 0, name: '北京市'),
-        city: Node(id: 0, name: '市辖区'),
-        district: Node(id: 0, name: '海淀区'),
+      expect(formatArea(AreaModel(
+        country: NodeModel(id: 0, name: '中国'),
+        province: NodeModel(id: 0, name: '北京市'),
+        city: NodeModel(id: 0, name: '市辖区'),
+        district: NodeModel(id: 0, name: '海淀区'),
       ), simplify: false), '北京市海淀区');
 
-      expect(formatArea(Area(
-        country: Node(id: 0, name: '中国'),
-        province: Node(id: 0, name: '河南省'),
-        city: Node(id: 0, name: '郑州市'),
-        district: Node(id: 0, name: '管城回族区'),
+      expect(formatArea(AreaModel(
+        country: NodeModel(id: 0, name: '中国'),
+        province: NodeModel(id: 0, name: '河南省'),
+        city: NodeModel(id: 0, name: '郑州市'),
+        district: NodeModel(id: 0, name: '管城回族区'),
       )), '河南 郑州 管城回族区');
 
-      expect(formatArea(Area(
-        country: Node(id: 0, name: '中国'),
-        province: Node(id: 0, name: '河南省'),
-        city: Node(id: 0, name: '郑州市'),
-        district: Node(id: 0, name: '管城回族区'),
+      expect(formatArea(AreaModel(
+        country: NodeModel(id: 0, name: '中国'),
+        province: NodeModel(id: 0, name: '河南省'),
+        city: NodeModel(id: 0, name: '郑州市'),
+        district: NodeModel(id: 0, name: '管城回族区'),
       ), simplify: false), '河南省郑州市管城回族区');
 
-      expect(formatArea(Area(
-        country: Node(id: 0, name: '中国香港'),
+      expect(formatArea(AreaModel(
+        country: NodeModel(id: 0, name: '中国香港'),
       )), '中国香港');
 
-      expect(formatArea(Area(
-        country: Node(id: 0, name: '中国澳门'),
+      expect(formatArea(AreaModel(
+        country: NodeModel(id: 0, name: '中国澳门'),
       )), '中国澳门');
 
-      expect(formatArea(Area(
-        country: Node(id: 0, name: '中国台湾'),
+      expect(formatArea(AreaModel(
+        country: NodeModel(id: 0, name: '中国台湾'),
       )), '中国台湾');
     });
     test('formatNumberWithComma', () {

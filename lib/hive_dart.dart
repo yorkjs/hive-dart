@@ -8,6 +8,7 @@ export 'src/convert/money.dart';
 export 'src/convert/rate.dart';
 export 'src/convert/weight.dart';
 
+export 'src/format/area.dart';
 export 'src/format/date.dart';
 export 'src/format/date_time.dart';
 export 'src/format/month.dart';

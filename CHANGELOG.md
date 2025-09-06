@@ -15,3 +15,7 @@
 ## 0.0.4
 
 - 调整 formatDateTime 方法签名
+
+## 0.0.5
+
+- 导出 model
