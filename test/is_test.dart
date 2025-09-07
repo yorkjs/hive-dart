@@ -17,5 +17,12 @@ void main() {
       expect(isCustomBarcode('C692418781212'), true);
     });
 
+    test('isPayAuthBarcode', () {
+      expect(isPayAuthBarcode('133619858964803511'), true);
+      expect(isPayAuthBarcode('283654147086344711'), true);
+      expect(isPayAuthBarcode('C69241878121'), false);
+      expect(isPayAuthBarcode('C692418781212'), false);
+    });
+
   });
 }

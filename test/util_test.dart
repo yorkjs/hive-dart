@@ -67,6 +67,7 @@ void main() {
     });
 
     test('truncateNumber', () {
+      expect(truncateNumber(1), '1');
       expect(truncateNumber(1.98321), '1');
       expect(truncateNumber(1.98321, decimals: 3), '1.983');
       expect(truncateNumber(1.98321, decimals: 2), '1.98');

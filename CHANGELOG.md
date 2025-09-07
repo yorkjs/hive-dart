@@ -19,3 +19,7 @@
 ## 0.0.5
 
 - 导出 model
+
+## 0.0.6
+
+- 新增 formatShelfLife、formatSize、formatRatePercent、isPayAuthBarcode、isInteger
