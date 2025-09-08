@@ -1,3 +1,4 @@
+import 'package:hive_dart/hive_dart.dart';
 import 'package:test/test.dart';
 import 'package:hive_dart/src/is/barcode.dart';
 
@@ -17,11 +18,19 @@ void main() {
       expect(isCustomBarcode('C692418781212'), true);
     });
 
-    test('isPayAuthBarcode', () {
-      expect(isPayAuthBarcode('133619858964803511'), true);
-      expect(isPayAuthBarcode('283654147086344711'), true);
-      expect(isPayAuthBarcode('C69241878121'), false);
-      expect(isPayAuthBarcode('C692418781212'), false);
+    test('isPayAuthCode', () {
+      expect(isPayAuthCode('133619858964803511'), true);
+      expect(isPayAuthCode('283654147086344711'), true);
+      expect(isPayAuthCode('C69241878121'), false);
+      expect(isPayAuthCode('C692418781212'), false);
+    });
+
+    test('isStandardBarcode', () {
+
+      expect(isInteger(1), true);
+      expect(isInteger(1.0), true);
+      expect(isInteger(1.1), false);
+
     });
 
   });

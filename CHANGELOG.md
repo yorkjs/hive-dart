@@ -23,3 +23,8 @@
 ## 0.0.6
 
 - 新增 formatShelfLife、formatSize、formatRatePercent、isPayAuthBarcode、isInteger
+
+## 0.0.7
+
+- 新增 formatAmount
+- isPayAuthBarcode 改名为 isPayAuthCode

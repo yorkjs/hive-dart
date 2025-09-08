@@ -1,6 +1,6 @@
 name: hive_dart
 description: A collection of useful utility functions for Dart.
-version: 0.0.6
+version: 0.0.7
 license: MIT
 repository: https://github.com/yorkjs/hive-dart
 

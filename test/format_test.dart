@@ -2,6 +2,7 @@ import 'package:hive_dart/src/constant/shelf_life.dart';
 import 'package:hive_dart/src/format/area.dart';
 import 'package:hive_dart/src/format/date.dart';
 import 'package:hive_dart/src/format/date_time.dart';
+import 'package:hive_dart/src/format/money.dart';
 import 'package:hive_dart/src/format/month.dart';
 import 'package:hive_dart/src/format/number.dart';
 import 'package:hive_dart/src/format/rate.dart';
@@ -80,6 +81,14 @@ void main() {
 
     test('formatWeek', () {
       expect(formatWeek(DateTime.parse('2025-07-25 00:00:00').millisecondsSinceEpoch), '07-20 ~ 07-26');
+    });
+
+    test('formatAmount', () {
+
+      expect(formatAmount(1000), '10.00元');
+      expect(formatAmount(1230), '12.30元');
+      expect(formatAmount(1234), '12.34元');
+
     });
 
     test('formatRatePercent', () {
