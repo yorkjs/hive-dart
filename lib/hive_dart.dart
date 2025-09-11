@@ -16,6 +16,7 @@ export 'src/format/date.dart';
 export 'src/format/date_time.dart';
 export 'src/format/month.dart';
 export 'src/format/number.dart';
+export 'src/format/money.dart';
 export 'src/format/rate.dart';
 export 'src/format/shelf_life.dart';
 export 'src/format/size.dart';

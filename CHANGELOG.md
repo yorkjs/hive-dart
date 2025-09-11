@@ -28,3 +28,7 @@
 
 - 新增 formatAmount
 - isPayAuthBarcode 改名为 isPayAuthCode
+
+## 0.0.8
+
+- 导出 formatAmount
