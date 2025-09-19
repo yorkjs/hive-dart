@@ -1,5 +1,6 @@
 import 'package:hive_dart/src/constant/shelf_life.dart';
 import 'package:hive_dart/src/format/area.dart';
+import 'package:hive_dart/src/format/discount.dart';
 import 'package:hive_dart/src/format/date.dart';
 import 'package:hive_dart/src/format/date_time.dart';
 import 'package:hive_dart/src/format/money.dart';
@@ -89,6 +90,12 @@ void main() {
       expect(formatAmount(1230), '12.30元');
       expect(formatAmount(1234), '12.34元');
 
+    });
+
+    test('formatDiscount', () {
+      expect(formatDiscount(8000), '8折');
+      expect(formatDiscount(8800), '8.8折');
+      expect(formatDiscount(8880), '8.8折'); // 保留一位小数
     });
 
     test('formatRatePercent', () {

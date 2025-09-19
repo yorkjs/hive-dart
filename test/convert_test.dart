@@ -1,4 +1,5 @@
 import 'package:hive_dart/src/constant/money.dart';
+import 'package:hive_dart/src/convert/discount.dart';
 import 'package:hive_dart/src/convert/money.dart';
 import 'package:hive_dart/src/convert/rate.dart';
 import 'package:hive_dart/src/convert/weight.dart';
@@ -17,6 +18,16 @@ void main() {
       expect(moneyToBackend(1.01), 101);
       expect(moneyToBackend(1.01, unit: MONEY_YUAN_TO_CENT), 101);
       expect(moneyToBackend(1.01, unit: MONEY_TEN_THOUSAND_YUAN_TO_CENT), 1010000);
+    });
+
+    test('convertDiscount', () {
+      expect(discountToDisplay(8000), 8);
+      expect(discountToDisplay(8800), 8.8);
+      expect(discountToDisplay(8880), 8.8); // 保留一位小数
+
+      expect(discountToBackend(8), 8000);
+      expect(discountToBackend(8.8), 8800);
+      expect(discountToBackend(8.88), 8800); // 保留一位小数
     });
 
     test('convertRate', () {

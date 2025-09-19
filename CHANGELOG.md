@@ -32,3 +32,7 @@
 ## 0.0.8
 
 - 导出 formatAmount
+
+## 0.0.9
+
+- 新增 discountToDisplay、discountToBackend、formatDiscount
