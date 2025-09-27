@@ -1,5 +1,6 @@
 import 'package:hive_dart/src/constant/shelf_life.dart';
 import 'package:hive_dart/src/format/area.dart';
+import 'package:hive_dart/src/format/count.dart';
 import 'package:hive_dart/src/format/discount.dart';
 import 'package:hive_dart/src/format/date.dart';
 import 'package:hive_dart/src/format/date_time.dart';
@@ -68,12 +69,23 @@ void main() {
       expect(formatDate(DateTime.parse('2020-10-01 00:00:00').millisecondsSinceEpoch), '2020-10-01');
       expect(formatDateShortly(DateTime.parse('2025-10-01 00:00:00').millisecondsSinceEpoch), '10-01');
       expect(formatDateShortly(DateTime.parse('2020-10-01 00:00:00').millisecondsSinceEpoch), '2020-10-01');
+
+      expect(formatDateRange(
+        DateTime.parse('2020-10-01 00:00:00').millisecondsSinceEpoch,
+        DateTime.parse('2020-10-02 08:10:00').millisecondsSinceEpoch
+      ), '2020-10-01 至 2020-10-02');
+
     });
 
     test('formatDateTime', () {
       expect(formatDateTime(DateTime.parse('2020-10-01 10:01:02').millisecondsSinceEpoch), '2020-10-01 10:01');
       expect(formatDateTimeShortly(DateTime.parse('2020-10-01 10:01:02').millisecondsSinceEpoch), '2020-10-01 10:01');
       expect(formatDateTimeShortly(DateTime.parse('2025-10-01 10:01:02').millisecondsSinceEpoch), '10-01 10:01');
+
+      expect(formatDateTimeRange(
+        DateTime.parse('2020-10-01 00:00:00').millisecondsSinceEpoch,
+        DateTime.parse('2020-10-02 08:10:00').millisecondsSinceEpoch
+      ), '2020-10-01 00:00 至 2020-10-02 08:10');
     });
 
     test('formatMonth', () {
@@ -102,6 +114,18 @@ void main() {
       expect(formatRatePercent(1000), '10%');
       expect(formatRatePercent(1230), '12.3%');
       expect(formatRatePercent(1234), '12.34%');
+    });
+
+    test('formatCount', () {
+
+      expect(formatCount(100), '100');
+      expect(formatCount(1000), '1,000');
+      expect(formatCount(10000), '10,000');
+
+      expect(formatCount(100, unit: '份'), '100份');
+      expect(formatCount(1000, unit: ''), '1,000');
+      expect(formatCount(10000, unit: '个'), '10,000个');
+
     });
 
     test('formatSize', () {

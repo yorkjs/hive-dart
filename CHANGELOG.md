@@ -36,3 +36,7 @@
 ## 0.0.9
 
 - 新增 discountToDisplay、discountToBackend、formatDiscount
+
+## 0.1.0
+
+- 新增 formatCount、formatDateRange、formatDateTimeRange
