@@ -1,5 +1,6 @@
 import 'package:hive_dart/src/constant/money.dart';
 import 'package:hive_dart/src/convert/discount.dart';
+import 'package:hive_dart/src/convert/distance.dart';
 import 'package:hive_dart/src/convert/money.dart';
 import 'package:hive_dart/src/convert/rate.dart';
 import 'package:hive_dart/src/convert/weight.dart';
@@ -28,6 +29,25 @@ void main() {
       expect(discountToBackend(8), 8000);
       expect(discountToBackend(8.8), 8800);
       expect(discountToBackend(8.88), 8800); // 保留一位小数
+    });
+
+    test('convertDistance', () {
+      expect(distanceToDisplay(8000), 8);
+      expect(distanceToDisplay(8800), 8.8);
+      expect(distanceToDisplay(8880), 8.88);
+      expect(distanceToDisplay(8888), 8.888);
+
+      expect(distanceToBackend(8), 8000);
+      expect(distanceToBackend(8.8), 8800);
+      expect(distanceToBackend(8.88), 8880);
+      expect(distanceToBackend(8.888), 8888);
+
+      expect(calculateDistance(
+        116.4074,   // 北京经度
+        39.9042,    // 北京纬度
+        121.4737,   // 上海经度
+        31.2304     // 上海纬度
+      ), 1067310);
     });
 
     test('convertRate', () {

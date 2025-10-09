@@ -40,3 +40,7 @@
 ## 0.1.0
 
 - 新增 formatCount、formatDateRange、formatDateTimeRange
+
+## 0.1.1
+
+- 新增 distanceToDisplay、distanceToBackend、calculateDistance、formatDistance

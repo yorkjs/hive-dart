@@ -1,3 +1,4 @@
+import 'package:hive_dart/hive_dart.dart';
 import 'package:hive_dart/src/constant/shelf_life.dart';
 import 'package:hive_dart/src/format/area.dart';
 import 'package:hive_dart/src/format/count.dart';
@@ -108,6 +109,13 @@ void main() {
       expect(formatDiscount(8000), '8折');
       expect(formatDiscount(8800), '8.8折');
       expect(formatDiscount(8880), '8.8折'); // 保留一位小数
+    });
+
+    test('formatDistance', () {
+      expect(formatDistance(8000), '8公里');
+      expect(formatDistance(8800), '8.8公里');
+      expect(formatDistance(8880), '8.88公里');
+      expect(formatDistance(8888), '8.888公里');
     });
 
     test('formatRatePercent', () {

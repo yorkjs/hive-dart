@@ -8,12 +8,14 @@ export 'src/constant/shelf_life.dart';
 export 'src/constant/size.dart';
 
 export 'src/convert/discount.dart';
+export 'src/convert/distance.dart';
 export 'src/convert/money.dart';
 export 'src/convert/rate.dart';
 export 'src/convert/weight.dart';
 
 export 'src/format/area.dart';
 export 'src/format/discount.dart';
+export 'src/format/distance.dart';
 export 'src/format/date.dart';
 export 'src/format/date_time.dart';
 export 'src/format/month.dart';
