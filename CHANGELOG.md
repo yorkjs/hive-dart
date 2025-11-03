@@ -44,3 +44,7 @@
 ## 0.1.1
 
 - 新增 distanceToDisplay、distanceToBackend、calculateDistance、formatDistance
+
+## 0.1.2
+
+- 新增 formatPenny

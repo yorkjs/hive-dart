@@ -1,6 +1,5 @@
 import 'package:hive_dart/hive_dart.dart';
 import 'package:test/test.dart';
-import 'package:hive_dart/src/is/barcode.dart';
 
 void main() {
 

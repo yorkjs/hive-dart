@@ -1,17 +1,5 @@
 import 'package:hive_dart/hive_dart.dart';
-import 'package:hive_dart/src/constant/shelf_life.dart';
-import 'package:hive_dart/src/format/area.dart';
 import 'package:hive_dart/src/format/count.dart';
-import 'package:hive_dart/src/format/discount.dart';
-import 'package:hive_dart/src/format/date.dart';
-import 'package:hive_dart/src/format/date_time.dart';
-import 'package:hive_dart/src/format/money.dart';
-import 'package:hive_dart/src/format/month.dart';
-import 'package:hive_dart/src/format/number.dart';
-import 'package:hive_dart/src/format/rate.dart';
-import 'package:hive_dart/src/format/shelf_life.dart';
-import 'package:hive_dart/src/format/size.dart';
-import 'package:hive_dart/src/format/week.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -102,6 +90,14 @@ void main() {
       expect(formatAmount(1000), '10.00元');
       expect(formatAmount(1230), '12.30元');
       expect(formatAmount(1234), '12.34元');
+
+    });
+
+    test('formatPenny', () {
+
+      expect(formatPenny(80), '0.080元');
+      expect(formatPenny(81), '0.081元');
+      expect(formatPenny(181), '0.181元');
 
     });
 
