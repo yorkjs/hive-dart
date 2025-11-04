@@ -48,3 +48,7 @@
 ## 0.1.2
 
 - 新增 formatPenny
+
+## 0.1.3
+
+- 新增 normalizeDuration、formatDuration

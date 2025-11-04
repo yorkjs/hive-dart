@@ -151,5 +151,13 @@ void main() {
       expect(formatShelfLife(365 * SHELF_LIFE_DAY), '1年');
       expect(formatShelfLife(SHELF_LIFE_YEAR + 6 * SHELF_LIFE_MONTH), '1年6个月');
     });
+
+    test('formatDuration', () {
+      expect(formatDuration(0), '');
+      expect(formatDuration(MS_SECOND), '1秒');
+      expect(formatDuration(MS_MINUTE), '1分钟');
+      expect(formatDuration(MS_HOUR), '1小时');
+      expect(formatDuration(MS_DAY), '1天');
+    });
   });
 }
