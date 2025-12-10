@@ -52,3 +52,7 @@
 ## 0.1.3
 
 - 新增 normalizeDuration、formatDuration
+
+## 0.1.4
+
+- isPayAuthCode 函数改成 parseAuthCode 函数

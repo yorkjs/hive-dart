@@ -1,5 +1,6 @@
 library;
 
+export 'src/constant/auth_code.dart';
 export 'src/constant/date.dart';
 export 'src/constant/date_time.dart';
 export 'src/constant/millisecond.dart';
@@ -32,6 +33,8 @@ export 'src/is/number.dart';
 
 export 'src/normalize/duration.dart';
 export 'src/normalize/version.dart';
+
+export 'src/parse/auth_code.dart';
 
 export 'src/util/date.dart';
 export 'src/util/number.dart';

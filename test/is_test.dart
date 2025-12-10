@@ -17,13 +17,6 @@ void main() {
       expect(isCustomBarcode('C692418781212'), true);
     });
 
-    test('isPayAuthCode', () {
-      expect(isPayAuthCode('133619858964803511'), true);
-      expect(isPayAuthCode('283654147086344711'), true);
-      expect(isPayAuthCode('C69241878121'), false);
-      expect(isPayAuthCode('C692418781212'), false);
-    });
-
     test('isStandardBarcode', () {
 
       expect(isInteger(1), true);
