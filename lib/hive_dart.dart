@@ -26,6 +26,7 @@ export 'src/format/money.dart';
 export 'src/format/rate.dart';
 export 'src/format/shelf_life.dart';
 export 'src/format/size.dart';
+export 'src/format/time.dart';
 export 'src/format/week.dart';
 
 export 'src/is/barcode.dart';
