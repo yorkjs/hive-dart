@@ -56,3 +56,7 @@
 ## 0.1.4
 
 - isPayAuthCode 函数改成 parseAuthCode 函数
+
+## 0.1.5
+
+- 新增 isEmail、isPrice、formatBusinessTimes、parsePhoneNumber

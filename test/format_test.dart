@@ -165,7 +165,7 @@ void main() {
       expect(formatBusinessTimes([0]), '');
       expect(formatBusinessTimes([0, 1440]), '全天');
       expect(formatBusinessTimes([0, 1440, 1440, 2880]), '全天、全天');
-      expect(formatBusinessTimes([540, 960, 1200, 1560]), '每日 09:00-16:00、每日 20:00-次日 02:00');
+      expect(formatBusinessTimes([540, 960, 1200, 1560]), '09:00-16:00、20:00-次日02:00');
     });
   });
 }

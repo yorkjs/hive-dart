@@ -13,7 +13,7 @@ String formatBusinessTimes(List<int> businessTimes) {
   }
 
   final timeRanges = <String>[];
-  for (var i = 0; i < businessTimes.length; i += 2) {
+  for (var i = 0; i < len; i += 2) {
     final start = businessTimes[i];
     final end = businessTimes[i + 1];
     final startTime = start % 1440;
@@ -27,14 +27,12 @@ String formatBusinessTimes(List<int> businessTimes) {
 
     var startTimeStr = formatHourMinutes(startTime);
     if (start > 1440) {
-      startTimeStr = '次日 $startTimeStr';
-    } else {
-      startTimeStr = '每日 $startTimeStr';
+      startTimeStr = '次日$startTimeStr';
     }
 
     var endTimeStr = formatHourMinutes(endTime);
     if (end > 1440) {
-      endTimeStr = '次日 $endTimeStr';
+      endTimeStr = '次日$endTimeStr';
     }
 
     timeRanges.add('$startTimeStr-$endTimeStr');
