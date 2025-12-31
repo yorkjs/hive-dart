@@ -56,6 +56,22 @@ void main() {
 
     test('formatDate', () {
       expect(formatDate(DateTime.parse('2020-10-01 00:00:00').millisecondsSinceEpoch), '2020-10-01');
+
+      expect(formatDate(DateTime.parse('2020-11-11 00:00:00').millisecondsSinceEpoch), '2020-11-11');
+      expect(formatDate(DateTime.parse('2020-10-01 00:00:00').millisecondsSinceEpoch), '2020-10-01');
+      expect(formatDate(DateTime.parse('2020-01-10 00:00:00').millisecondsSinceEpoch), '2020-01-10');
+      expect(formatDate(DateTime.parse('2020-01-01 00:00:00').millisecondsSinceEpoch), '2020-01-01');
+
+      expect(formatDate(DateTime.parse('2020-11-11 00:00:00').millisecondsSinceEpoch, format: DATE_YEAR_MONTH_DATE_SLASH), '2020/11/11');
+      expect(formatDate(DateTime.parse('2020-10-01 00:00:00').millisecondsSinceEpoch, format: DATE_YEAR_MONTH_DATE_SLASH), '2020/10/01');
+      expect(formatDate(DateTime.parse('2020-01-10 00:00:00').millisecondsSinceEpoch, format: DATE_YEAR_MONTH_DATE_SLASH), '2020/01/10');
+      expect(formatDate(DateTime.parse('2020-01-01 00:00:00').millisecondsSinceEpoch, format: DATE_YEAR_MONTH_DATE_SLASH), '2020/01/01');
+
+      expect(formatDate(DateTime.parse('2020-11-11 00:00:00').millisecondsSinceEpoch, format: DATE_YEAR_MONTH_DATE_CHINESE), '2020年11月11日');
+      expect(formatDate(DateTime.parse('2020-10-01 00:00:00').millisecondsSinceEpoch, format: DATE_YEAR_MONTH_DATE_CHINESE), '2020年10月1日');
+      expect(formatDate(DateTime.parse('2020-01-10 00:00:00').millisecondsSinceEpoch, format: DATE_YEAR_MONTH_DATE_CHINESE), '2020年1月10日');
+      expect(formatDate(DateTime.parse('2020-01-01 00:00:00').millisecondsSinceEpoch, format: DATE_YEAR_MONTH_DATE_CHINESE), '2020年1月1日');
+
       expect(formatDateShortly(DateTime.parse('2025-10-01 00:00:00').millisecondsSinceEpoch), '10-01');
       expect(formatDateShortly(DateTime.parse('2020-10-01 00:00:00').millisecondsSinceEpoch), '2020-10-01');
 
@@ -67,6 +83,23 @@ void main() {
     });
 
     test('formatDateTime', () {
+
+      expect(formatDateTime(DateTime.parse('2020-11-11 10:01:02').millisecondsSinceEpoch), '2020-11-11 10:01');
+      expect(formatDateTime(DateTime.parse('2020-10-01 01:01:02').millisecondsSinceEpoch), '2020-10-01 01:01');
+      expect(formatDateTime(DateTime.parse('2020-01-10 10:10:02').millisecondsSinceEpoch), '2020-01-10 10:10');
+      expect(formatDateTime(DateTime.parse('2020-01-01 10:10:02').millisecondsSinceEpoch), '2020-01-01 10:10');
+
+      expect(formatDateTime(DateTime.parse('2020-11-11 10:01:02').millisecondsSinceEpoch, format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SLASH), '2020/11/11 10:01');
+      expect(formatDateTime(DateTime.parse('2020-10-01 01:01:02').millisecondsSinceEpoch, format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SLASH), '2020/10/01 01:01');
+      expect(formatDateTime(DateTime.parse('2020-01-10 10:10:02').millisecondsSinceEpoch, format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SLASH), '2020/01/10 10:10');
+      expect(formatDateTime(DateTime.parse('2020-01-01 10:10:02').millisecondsSinceEpoch, format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SLASH), '2020/01/01 10:10');
+
+      expect(formatDateTime(DateTime.parse('2020-11-11 10:01:02').millisecondsSinceEpoch, format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_CHINESE), '2020年11月11日 10:01');
+      expect(formatDateTime(DateTime.parse('2020-10-01 01:01:02').millisecondsSinceEpoch, format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_CHINESE), '2020年10月1日 01:01');
+      expect(formatDateTime(DateTime.parse('2020-01-10 10:10:02').millisecondsSinceEpoch, format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_CHINESE), '2020年1月10日 10:10');
+      expect(formatDateTime(DateTime.parse('2020-01-01 10:10:02').millisecondsSinceEpoch, format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_CHINESE), '2020年1月1日 10:10');
+
+
       expect(formatDateTime(DateTime.parse('2020-10-01 10:01:02').millisecondsSinceEpoch), '2020-10-01 10:01');
       expect(formatDateTimeShortly(DateTime.parse('2020-10-01 10:01:02').millisecondsSinceEpoch), '2020-10-01 10:01');
       expect(formatDateTimeShortly(DateTime.parse('2025-10-01 10:01:02').millisecondsSinceEpoch), '10-01 10:01');

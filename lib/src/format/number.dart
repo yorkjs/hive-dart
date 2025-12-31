@@ -38,5 +38,5 @@ String formatNumberWithComma(num value, {int decimals = 0}) {
     result += '.${'0' * decimals}';
   }
 
-    return isNegative ? '-$result' : result;
+  return isNegative ? '-$result' : result;
 }

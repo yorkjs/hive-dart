@@ -60,3 +60,7 @@
 ## 0.1.5
 
 - 新增 isEmail、isPrice、formatBusinessTimes、parsePhoneNumber
+
+## 0.1.6
+
+- formatDate 新增 format 参数

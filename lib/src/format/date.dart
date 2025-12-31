@@ -2,9 +2,9 @@ import 'package:intl/intl.dart';
 import '../constant/date.dart';
 
 /// 把时间戳格式化为 2020-10-01 格式
-String formatDate(int timestamp) {
+String formatDate(int timestamp, {String format = DATE_YEAR_MONTH_DATE}) {
   final date = DateTime.fromMillisecondsSinceEpoch(timestamp);
-  return DateFormat(DATE_YEAR_MONTH_DATE).format(date);
+  return DateFormat(format).format(date);
 }
 
 /// 把时间戳格式化为 2020-10-01 至 2020-10-02 格式
