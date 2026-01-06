@@ -100,12 +100,15 @@ class IArea {
   INode? city;
   @JsonKey(name: "district")
   INode? district;
+  @JsonKey(name: "address")
+  String? address;
 
   IArea({
     this.country,
     this.province,
     this.city,
     this.district,
+    this.address,
   });
 
   factory IArea.fromJson(Map<String, dynamic> json) =>
@@ -121,6 +124,7 @@ String formatArea(IArea area, {bool simplify = true}) {
   final province = area.province;
   final city = area.city;
   final district = area.district;
+  final address = area.address;
 
   final List<String> list = [];
   String prevItem = '';
@@ -161,6 +165,9 @@ String formatArea(IArea area, {bool simplify = true}) {
     if (item.isNotEmpty) {
       appendItem(item);
     }
+  }
+  if (address != null && address.isNotEmpty) {
+    appendItem(address);
   }
 
   if (list.length > 1 && isChina) {

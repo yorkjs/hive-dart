@@ -6,5 +6,5 @@ String formatWeek(int timestamp) {
   final date = DateTime.fromMillisecondsSinceEpoch(timestamp);
   final offset = -1 * date.weekday;
   final startTimestamp = timestamp + offset * MS_DAY;
-  return '${formatDateShortly(startTimestamp)} ~ ${formatDateShortly(startTimestamp + 6 * MS_DAY)}';
+  return '${formatDateShortly(startTimestamp)} 至 ${formatDateShortly(startTimestamp + 6 * MS_DAY)}';
 }

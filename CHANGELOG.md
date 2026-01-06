@@ -64,3 +64,7 @@
 ## 0.1.6
 
 - formatDate 新增 format 参数
+
+## 0.1.7
+
+- formatArea 新增 address 参数

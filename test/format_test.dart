@@ -32,7 +32,23 @@ void main() {
         province: INode(id: 0, name: '河南省'),
         city: INode(id: 0, name: '郑州市'),
         district: INode(id: 0, name: '管城回族区'),
+        address: '测试地址',
+      )), '河南 郑州 管城回族区 测试地址');
+
+      expect(formatArea(IArea(
+        country: INode(id: 0, name: '中国'),
+        province: INode(id: 0, name: '河南省'),
+        city: INode(id: 0, name: '郑州市'),
+        district: INode(id: 0, name: '管城回族区'),
       ), simplify: false), '河南省郑州市管城回族区');
+
+      expect(formatArea(IArea(
+        country: INode(id: 0, name: '中国'),
+        province: INode(id: 0, name: '河南省'),
+        city: INode(id: 0, name: '郑州市'),
+        district: INode(id: 0, name: '管城回族区'),
+        address: '测试地址',
+      ), simplify: false), '河南省郑州市管城回族区测试地址');
 
       expect(formatArea(IArea(
         country: INode(id: 0, name: '中国香港'),
@@ -72,7 +88,7 @@ void main() {
       expect(formatDate(DateTime.parse('2020-01-10 00:00:00').millisecondsSinceEpoch, format: DATE_YEAR_MONTH_DATE_CHINESE), '2020年1月10日');
       expect(formatDate(DateTime.parse('2020-01-01 00:00:00').millisecondsSinceEpoch, format: DATE_YEAR_MONTH_DATE_CHINESE), '2020年1月1日');
 
-      expect(formatDateShortly(DateTime.parse('2025-10-01 00:00:00').millisecondsSinceEpoch), '10-01');
+      expect(formatDateShortly(DateTime.parse('2026-10-01 00:00:00').millisecondsSinceEpoch), '10-01');
       expect(formatDateShortly(DateTime.parse('2020-10-01 00:00:00').millisecondsSinceEpoch), '2020-10-01');
 
       expect(formatDateRange(
@@ -102,7 +118,7 @@ void main() {
 
       expect(formatDateTime(DateTime.parse('2020-10-01 10:01:02').millisecondsSinceEpoch), '2020-10-01 10:01');
       expect(formatDateTimeShortly(DateTime.parse('2020-10-01 10:01:02').millisecondsSinceEpoch), '2020-10-01 10:01');
-      expect(formatDateTimeShortly(DateTime.parse('2025-10-01 10:01:02').millisecondsSinceEpoch), '10-01 10:01');
+      expect(formatDateTimeShortly(DateTime.parse('2026-10-01 10:01:02').millisecondsSinceEpoch), '10-01 10:01');
 
       expect(formatDateTimeRange(
         DateTime.parse('2020-10-01 00:00:00').millisecondsSinceEpoch,
@@ -115,7 +131,8 @@ void main() {
     });
 
     test('formatWeek', () {
-      expect(formatWeek(DateTime.parse('2025-07-25 00:00:00').millisecondsSinceEpoch), '07-20 ~ 07-26');
+      expect(formatWeek(DateTime.parse('2025-07-25 00:00:00').millisecondsSinceEpoch), '2025-07-20 至 2025-07-26');
+      expect(formatWeek(DateTime.parse('2026-02-14 00:00:00').millisecondsSinceEpoch), '02-08 至 02-14');
     });
 
     test('formatAmount', () {
