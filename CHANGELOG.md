@@ -68,3 +68,7 @@
 ## 0.1.7
 
 - formatArea 新增 address 参数
+
+## 0.1.8
+
+- 新增 formatCountShortly

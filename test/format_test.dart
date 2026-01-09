@@ -180,6 +180,20 @@ void main() {
       expect(formatCount(1000, unit: ''), '1,000');
       expect(formatCount(10000, unit: '个'), '10,000个');
 
+      expect(formatCountShortly(1000000000000, unit: '个'), '1万亿个');
+      expect(formatCountShortly(1100000000000, unit: '个'), '1.1万亿个');
+      expect(formatCountShortly(1110000000000, unit: '个'), '1.1万亿个');
+      expect(formatCountShortly(1000000000, unit: '个'), '10亿个');
+      expect(formatCountShortly(100000000, unit: '个'), '1亿个');
+      expect(formatCountShortly(110000000, unit: '个'), '1.1亿个');
+      expect(formatCountShortly(111000000, unit: '个'), '1.1亿个');
+      expect(formatCountShortly(100000, unit: '个'), '10万个');
+      expect(formatCountShortly(10000, unit: '个'), '1万个');
+      expect(formatCountShortly(11000, unit: '个'), '1.1万个');
+      expect(formatCountShortly(11100, unit: '个'), '1.1万个');
+      expect(formatCountShortly(1000, unit: '个'), '1000个');
+      expect(formatCountShortly(1000), '1000');
+
     });
 
     test('formatSize', () {
