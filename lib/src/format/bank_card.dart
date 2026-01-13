@@ -1,5 +1,5 @@
 /// 格式化银行卡号
-String formatBankCardNumber(String value) {
+String formatBankCardNumber(String value, {bool masked = true}) {
   final length = value.length;
 
   /// 每4位一组，最后一组如果不足4位，有多少显示多少
@@ -7,6 +7,12 @@ String formatBankCardNumber(String value) {
   for (int i = 0; i < length; i += 4) {
     final end = (i + 4) > length ? length : i + 4;
     parts.add(value.substring(i, end));
+  }
+
+  if (masked) {
+    for (int i = 0, len = parts.length; i < len - 1; i++) {
+      parts[i] = '****';
+    }
   }
 
   return parts.join(' ');

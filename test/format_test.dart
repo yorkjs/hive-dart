@@ -72,12 +72,19 @@ void main() {
     });
 
     test('formatBankCardNumber', () {
-      expect(formatBankCardNumber('9879764467646788'), '9879 7644 6764 6788');
-      expect(formatBankCardNumber('98797644676467881'), '9879 7644 6764 6788 1');
-      expect(formatBankCardNumber('987976446764678812'), '9879 7644 6764 6788 12');
-      expect(formatBankCardNumber('9879764467646788123'), '9879 7644 6764 6788 123');
-      expect(formatBankCardNumber('98797644676467881234'), '9879 7644 6764 6788 1234');
-      expect(formatBankCardNumber('987976446764678812345'), '9879 7644 6764 6788 1234 5');
+      expect(formatBankCardNumber('9879764467646788'), '**** **** **** 6788');
+      expect(formatBankCardNumber('98797644676467881'), '**** **** **** **** 1');
+      expect(formatBankCardNumber('987976446764678812'), '**** **** **** **** 12');
+      expect(formatBankCardNumber('9879764467646788123'), '**** **** **** **** 123');
+      expect(formatBankCardNumber('98797644676467881234'), '**** **** **** **** 1234');
+      expect(formatBankCardNumber('987976446764678812345'), '**** **** **** **** **** 5');
+
+      expect(formatBankCardNumber('9879764467646788', masked: false), '9879 7644 6764 6788');
+      expect(formatBankCardNumber('98797644676467881', masked: false), '9879 7644 6764 6788 1');
+      expect(formatBankCardNumber('987976446764678812', masked: false), '9879 7644 6764 6788 12');
+      expect(formatBankCardNumber('9879764467646788123', masked: false), '9879 7644 6764 6788 123');
+      expect(formatBankCardNumber('98797644676467881234', masked: false), '9879 7644 6764 6788 1234');
+      expect(formatBankCardNumber('987976446764678812345', masked: false), '9879 7644 6764 6788 1234 5');
     });
 
     test('formatDate', () {
