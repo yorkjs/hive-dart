@@ -1,4 +1,5 @@
 import 'package:hive_dart/hive_dart.dart';
+import 'package:hive_dart/src/format/bank_card.dart';
 import 'package:hive_dart/src/format/count.dart';
 import 'package:test/test.dart';
 
@@ -68,6 +69,15 @@ void main() {
       expect(formatNumberWithComma(1234567.89, decimals: 0), '1,234,567');
       expect(formatNumberWithComma(1234567.89, decimals: 3), '1,234,567.890');
       expect(formatNumberWithComma(1234567.89, decimals: 5), '1,234,567.89000');
+    });
+
+    test('formatBankCardNumber', () {
+      expect(formatBankCardNumber('9879764467646788'), '9879 7644 6764 6788');
+      expect(formatBankCardNumber('98797644676467881'), '9879 7644 6764 6788 1');
+      expect(formatBankCardNumber('987976446764678812'), '9879 7644 6764 6788 12');
+      expect(formatBankCardNumber('9879764467646788123'), '9879 7644 6764 6788 123');
+      expect(formatBankCardNumber('98797644676467881234'), '9879 7644 6764 6788 1234');
+      expect(formatBankCardNumber('987976446764678812345'), '9879 7644 6764 6788 1234 5');
     });
 
     test('formatDate', () {
