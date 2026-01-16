@@ -16,7 +16,10 @@ export 'src/convert/rate.dart';
 export 'src/convert/weight.dart';
 
 export 'src/format/area.dart';
+export 'src/format/bank_card.dart';
 export 'src/format/business_time.dart';
+export 'src/format/category.dart';
+export 'src/format/count.dart';
 export 'src/format/discount.dart';
 export 'src/format/distance.dart';
 export 'src/format/duration.dart';

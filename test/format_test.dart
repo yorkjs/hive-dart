@@ -63,6 +63,24 @@ void main() {
         country: INode(id: 0, name: '中国台湾'),
       )), '中国台湾');
     });
+
+    test('formatCategory', () {
+      expect(formatCategory(ICategory()), '');
+      expect(formatCategory(ICategory(
+        category1: INode(id: 0, name: '美食餐饮'),
+      )), '美食餐饮');
+      expect(formatCategory(ICategory(
+        category1: INode(id: 0, name: '美食餐饮'),
+        category2: INode(id: 0, name: '中餐'),
+      )), '美食餐饮/中餐');
+      expect(formatCategory(ICategory(
+        category1: INode(id: 0, name: '美食餐饮'),
+        category2: INode(id: 0, name: '中餐'),
+        category3: INode(id: 0, name: '烤鸭'),
+      )), '美食餐饮/中餐/烤鸭');
+    });
+
+
     test('formatNumberWithComma', () {
       expect(formatNumberWithComma(-228.80, decimals: 2), '-228.80');
       expect(formatNumberWithComma(1234567.89), '1,234,567');
