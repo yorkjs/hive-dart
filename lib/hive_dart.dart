@@ -1,6 +1,10 @@
 library;
 
+export 'src/type.dart';
+
 export 'src/constant/auth_code.dart';
+export 'src/constant/year.dart';
+export 'src/constant/month.dart';
 export 'src/constant/date.dart';
 export 'src/constant/date_time.dart';
 export 'src/constant/millisecond.dart';
@@ -16,6 +20,7 @@ export 'src/convert/rate.dart';
 export 'src/convert/weight.dart';
 
 export 'src/format/area.dart';
+export 'src/format/birthday.dart';
 export 'src/format/bank_card.dart';
 export 'src/format/business_time.dart';
 export 'src/format/category.dart';
@@ -26,6 +31,7 @@ export 'src/format/duration.dart';
 export 'src/format/date.dart';
 export 'src/format/date_time.dart';
 export 'src/format/month.dart';
+export 'src/format/year.dart';
 export 'src/format/number.dart';
 export 'src/format/money.dart';
 export 'src/format/rate.dart';

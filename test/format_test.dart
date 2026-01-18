@@ -1,6 +1,4 @@
 import 'package:hive_dart/hive_dart.dart';
-import 'package:hive_dart/src/format/bank_card.dart';
-import 'package:hive_dart/src/format/count.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -161,6 +159,10 @@ void main() {
       ), '2020-10-01 00:00 至 2020-10-02 08:10');
     });
 
+    test('formatYear', () {
+      expect(formatYear(DateTime.parse('2020-10-01 00:00:00').millisecondsSinceEpoch), '2020');
+    });
+
     test('formatMonth', () {
       expect(formatMonth(DateTime.parse('2020-10-01 00:00:00').millisecondsSinceEpoch), '2020-10');
     });
@@ -168,6 +170,10 @@ void main() {
     test('formatWeek', () {
       expect(formatWeek(DateTime.parse('2025-07-25 00:00:00').millisecondsSinceEpoch), '2025-07-20 至 2025-07-26');
       expect(formatWeek(DateTime.parse('2026-02-14 00:00:00').millisecondsSinceEpoch), '02-08 至 02-14');
+    });
+
+    test('formatBirthday', () {
+      expect(formatBirthday(DateTime.parse('2020-10-01 00:00:00').millisecondsSinceEpoch), '10.01');
     });
 
     test('formatAmount', () {

@@ -1,4 +1,4 @@
-import 'package:hive_dart/src/format/area.dart';
+import 'package:hive_dart/src/type.dart';
 
 class ICategory {
   INode? category1;

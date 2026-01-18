@@ -1,3 +1,4 @@
+import 'package:hive_dart/src/type.dart';
 
 final Map<String, String> provinceMap = {
   '北京市': '北京',
@@ -69,16 +70,6 @@ final Map<String, String> cityMap = {
   '黔东南苗族侗族自治州': '黔东南',
   '黔南布依族苗族自治州': '黔南',
 };
-
-class INode {
-  int id;
-  String name;
-
-  INode({
-    required this.id,
-    required this.name,
-  });
-}
 
 class IArea {
   INode? country;
