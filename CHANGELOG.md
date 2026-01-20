@@ -71,4 +71,4 @@
 
 ## 0.1.8
 
-- 新增 formatAmountShortly, formatCountShortly, formatBankCardNumber
+- 新增 formatYear, formatBirthday, formatCategory, formatAmountShortly, formatCountShortly, formatBankCardNumber
