@@ -2,16 +2,20 @@ import '../constant/auth_code.dart';
 
 /// 解析付款码
 int parseAuthCode(String value) {
-  // 微信    133619858964803511
-  // 支付宝  283654147086344711
-  final length = value.length;
-  if (length == 18 || length == 19 || length == 20) {
-    if (value.startsWith('1')) {
-      return AUTH_CODE_WECHAT;
-    }
-    if (value.startsWith('2')) {
-      return AUTH_CODE_ALIPAY;
-    }
+
+  // 微信支付通常以 10-15 开头、18 位纯数字
+  if (RegExp(r'^1[0-5]').hasMatch(value)
+    && RegExp(r'^\d{18}$').hasMatch(value)
+  ) {
+    return AUTH_CODE_WECHAT;
   }
+
+  // 支付宝通常以 25-30 开头、18-25 位纯数字
+  if ((RegExp(r'^2[5-9]').hasMatch(value) || RegExp(r'^30').hasMatch(value))
+    && RegExp(r'^\d{18,25}$').hasMatch(value)
+  ) {
+    return AUTH_CODE_ALIPAY;
+  }
+
   return -1;
 }
