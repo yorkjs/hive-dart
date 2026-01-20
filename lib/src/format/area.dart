@@ -1,4 +1,6 @@
 import 'package:hive_dart/src/type.dart';
+import 'package:json_annotation/json_annotation.dart';
+part 'area.g.dart';
 
 final Map<String, String> provinceMap = {
   '北京市': '北京',
@@ -71,11 +73,17 @@ final Map<String, String> cityMap = {
   '黔南布依族苗族自治州': '黔南',
 };
 
+@JsonSerializable()
 class IArea {
+  @JsonKey(name: "country")
   INode? country;
+  @JsonKey(name: "province")
   INode? province;
+  @JsonKey(name: "city")
   INode? city;
+  @JsonKey(name: "district")
   INode? district;
+  @JsonKey(name: "address")
   String? address;
 
   IArea({
@@ -85,6 +93,11 @@ class IArea {
     this.district,
     this.address,
   });
+
+  factory IArea.fromJson(Map<String, dynamic> json) =>
+      _$IAreaFromJson(json);
+
+  Map<String, dynamic> toJson() => _$IAreaToJson(this);
 }
 
 // 格式化地区信息

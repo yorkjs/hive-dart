@@ -1,8 +1,14 @@
 import 'package:hive_dart/src/type.dart';
+import 'package:json_annotation/json_annotation.dart';
+part 'category.g.dart';
 
+@JsonSerializable()
 class ICategory {
+  @JsonKey(name: "category1")
   INode? category1;
+  @JsonKey(name: "category2")
   INode? category2;
+  @JsonKey(name: "category3")
   INode? category3;
 
   ICategory({
@@ -10,6 +16,11 @@ class ICategory {
     this.category2,
     this.category3,
   });
+
+  factory ICategory.fromJson(Map<String, dynamic> json) =>
+      _$ICategoryFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ICategoryToJson(this);
 }
 
 // 格式化地区信息

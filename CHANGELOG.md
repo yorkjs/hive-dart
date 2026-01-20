@@ -72,3 +72,7 @@
 ## 0.1.8
 
 - 新增 formatYear, formatBirthday, formatCategory, formatAmountShortly, formatCountShortly, formatBankCardNumber
+
+## 0.1.9
+
+- 类型支持 JSON 序列化
