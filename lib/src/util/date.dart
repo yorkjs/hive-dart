@@ -83,3 +83,47 @@ int endOfMonth(int timestamp) {
           lastDayOfMonth.year, lastDayOfMonth.month, lastDayOfMonth.day,
           23, 59, 59, 999).millisecondsSinceEpoch;
 }
+
+
+class ITimeRangeOptimizer {
+  final void Function(int day)? isDay;
+  final void Function(int week)? isWeek;
+  final void Function(int month)? isMonth;
+  final void Function(int start, int end) isRange;
+
+  ITimeRangeOptimizer({
+    this.isDay,
+    this.isWeek,
+    this.isMonth,
+    required this.isRange,
+  });
+}
+
+/// 优化时间范围，尽量归一到某个类型下，无法归一时，才用范围
+void optimizeTimeRange(
+  int startTimestamp,
+  int endTimestamp,
+  ITimeRangeOptimizer optimizer,
+) {
+  final startDay = startOfDay(startTimestamp);
+  final endDay = endOfDay(startTimestamp);
+
+  final startWeek = startOfWeek(startTimestamp);
+  final endWeek = endOfWeek(startTimestamp);
+
+  final startMonth = startOfMonth(startTimestamp);
+  final endMonth = endOfMonth(startTimestamp);
+
+  if (startTimestamp == startDay && endTimestamp == endDay && optimizer.isDay != null) {
+    optimizer.isDay!(startTimestamp);
+  }
+  else if (startTimestamp == startWeek && endTimestamp == endWeek && optimizer.isWeek != null) {
+    optimizer.isWeek!(startTimestamp);
+  }
+  else if (startTimestamp == startMonth && endTimestamp == endMonth && optimizer.isMonth != null) {
+    optimizer.isMonth!(startTimestamp);
+  }
+  else {
+    optimizer.isRange(startTimestamp, endTimestamp);
+  }
+}
