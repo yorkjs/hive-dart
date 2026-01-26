@@ -11,7 +11,7 @@ num distanceToDisplay(int value) {
 
 /// 千米 转换为 米
 num distanceToBackend(num value) {
-  return timesNumber(value, 1000);
+  return timesNumber(value, 1000).toInt();
 }
 
 // 定义地球半径（单位：米）

@@ -18,5 +18,5 @@ num discountToBackend(num value) {
       ? value
       : double.parse(truncateNumber(value, decimals: 1)),
     1000
-  );
+  ).toInt();
 }

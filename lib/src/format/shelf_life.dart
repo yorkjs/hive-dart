@@ -1,33 +1,23 @@
-import '../constant/shelf_life.dart';
+import 'package:hive_dart/src/normalize/shelf_life.dart';
 
 String formatShelfLife(int value) {
-  if (value <= 0) {
-    return '';
+
+  final List<String> result = [];
+  final data = normalizeShelfLife(value);
+
+  if (data.years > 0) {
+    result.add('${data.years}年');
+  }
+  if (data.months > 0) {
+    result.add('${data.months}个月');
+  }
+  if (data.days > 0) {
+    result.add('${data.days}天');
+  }
+  if (data.hours > 0) {
+    result.add('${data.hours}小时');
   }
 
-  var result = '';
+  return result.join('');
 
-  final year = value ~/ SHELF_LIFE_YEAR;
-  if (year > 0) {
-    result += '$year年';
-    value -= SHELF_LIFE_YEAR * year;
-  }
-
-  final month = value ~/ SHELF_LIFE_MONTH;
-  if (month > 0) {
-    result += '$month个月';
-    value -= SHELF_LIFE_MONTH * month;
-  }
-
-  final day = value ~/ SHELF_LIFE_DAY;
-  if (day > 0) {
-    result += '$day天';
-    value -= SHELF_LIFE_DAY * day;
-  }
-
-  if (value > 0) {
-    result += '$value小时';
-  }
-
-  return result;
 }

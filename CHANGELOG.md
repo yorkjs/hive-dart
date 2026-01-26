@@ -76,3 +76,7 @@
 ## 0.1.9
 
 - 类型支持 JSON 序列化
+
+## 0.2.0
+
+- 新增 normalizeShelfLife, optimizeTimeRange

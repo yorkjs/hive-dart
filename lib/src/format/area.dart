@@ -137,8 +137,12 @@ String formatArea(IArea area, {bool simplify = true}) {
 
   if (city != null) {
     final item = isSimplify ? formatCity(city.name) : city.name;
-    if (item.isNotEmpty && item != '市辖区' && item != '县'
-        && item != '省直辖' && item != prevItem) {
+    if (item.isNotEmpty
+      && item != '市辖区'
+      && item != '县'
+      && item != '省直辖'
+      && item != prevItem
+    ) {
       appendItem(item);
     }
   }
@@ -169,11 +173,12 @@ String formatProvince(String name) {
     return name.substring(0, name.length - 1);
   }
   if (name.startsWith('新疆')
-      || name.startsWith('西藏')
-      || name.startsWith('宁夏')
-      || name.startsWith('广西')
-      || name.startsWith('香港')
-      || name.startsWith('澳门')) {
+    || name.startsWith('西藏')
+    || name.startsWith('宁夏')
+    || name.startsWith('广西')
+    || name.startsWith('香港')
+    || name.startsWith('澳门')
+  ) {
     return name.substring(0, 2);
   }
   if (name.startsWith('内蒙古')) {

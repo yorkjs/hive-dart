@@ -13,10 +13,10 @@ num weightToKG(int value) {
 
 /// 克 转为后端使用的 毫克
 num weightGToBackend(num value) {
-  return timesNumber(value, 1000);
+  return timesNumber(value, 1000).toInt();
 }
 
 /// 千克 转为后端使用的 毫克
 num weightKGToBackend(num value) {
-  return timesNumber(value, 1000000);
+  return timesNumber(value, 1000000).toInt();
 }
