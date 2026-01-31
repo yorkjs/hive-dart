@@ -17,6 +17,7 @@ export 'src/convert/discount.dart';
 export 'src/convert/distance.dart';
 export 'src/convert/money.dart';
 export 'src/convert/rate.dart';
+export 'src/convert/time.dart';
 export 'src/convert/weight.dart';
 
 export 'src/format/area.dart';

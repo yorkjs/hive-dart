@@ -80,3 +80,7 @@
 ## 0.2.0
 
 - 新增 normalizeShelfLife, optimizeTimeRange
+
+## 0.2.1
+
+- 新增 truncateString, startOfHour, startOfPrevHour, startOfNextHour, endOfHour, timeToTimestamp, timestampToTime, stringToTime

@@ -1,24 +1,23 @@
-import 'package:hive_dart/src/constant/money.dart';
-import 'package:hive_dart/src/convert/discount.dart';
-import 'package:hive_dart/src/convert/distance.dart';
-import 'package:hive_dart/src/convert/money.dart';
-import 'package:hive_dart/src/convert/rate.dart';
-import 'package:hive_dart/src/convert/weight.dart';
+import 'package:hive_dart/hive_dart.dart';
 import 'package:test/test.dart';
 
 void main() {
-
   group('convert', () {
-
     test('convertMoney', () {
       expect(moneyToDisplay(100), 1);
       expect(moneyToDisplay(100, unit: MONEY_YUAN_TO_CENT), 1);
       expect(moneyToDisplay(1000000, unit: MONEY_TEN_THOUSAND_YUAN_TO_CENT), 1);
-      expect(moneyToDisplay(1100000, unit: MONEY_TEN_THOUSAND_YUAN_TO_CENT), 1.1);
+      expect(
+        moneyToDisplay(1100000, unit: MONEY_TEN_THOUSAND_YUAN_TO_CENT),
+        1.1,
+      );
 
       expect(moneyToBackend(1.01), 101);
       expect(moneyToBackend(1.01, unit: MONEY_YUAN_TO_CENT), 101);
-      expect(moneyToBackend(1.01, unit: MONEY_TEN_THOUSAND_YUAN_TO_CENT), 1010000);
+      expect(
+        moneyToBackend(1.01, unit: MONEY_TEN_THOUSAND_YUAN_TO_CENT),
+        1010000,
+      );
     });
 
     test('convertDiscount', () {
@@ -42,12 +41,15 @@ void main() {
       expect(distanceToBackend(8.88), 8880);
       expect(distanceToBackend(8.888), 8888);
 
-      expect(calculateDistance(
-        116.4074,   // 北京经度
-        39.9042,    // 北京纬度
-        121.4737,   // 上海经度
-        31.2304     // 上海纬度
-      ), 1067310);
+      expect(
+        calculateDistance(
+          116.4074, // 北京经度
+          39.9042, // 北京纬度
+          121.4737, // 上海经度
+          31.2304, // 上海纬度
+        ),
+        1067310,
+      );
     });
 
     test('convertRate', () {
@@ -63,7 +65,6 @@ void main() {
     });
 
     test('convertWeight', () {
-
       expect(weightToG(1), 0.001);
       expect(weightToG(10), 0.01);
       expect(weightToG(100), 0.1);
@@ -79,7 +80,6 @@ void main() {
       expect(weightToKG(1000000), 1);
       expect(weightToKG(10000000), 10);
 
-
       expect(weightGToBackend(0.001), 1);
       expect(weightGToBackend(0.01), 10);
       expect(weightGToBackend(0.1), 100);
@@ -93,5 +93,120 @@ void main() {
       expect(weightKGToBackend(10), 10000000);
     });
 
+    test('convertTime', () {
+      final date = DateTime.now();
+      final timestamp = date.millisecondsSinceEpoch;
+
+      expect(timeToTimestamp(date), timestamp);
+      expect(timestampToTime(timestamp).millisecondsSinceEpoch, timestamp);
+
+      // 测试无效日期
+      expect(timeToTimestamp(DateTime.fromMillisecondsSinceEpoch(0)), 0);
+
+      var time = stringToTime(
+        '2020-10-01 10:00:00',
+        DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+      );
+      expect(
+        formatDateTime(
+          time!.millisecondsSinceEpoch,
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2020-10-01 10:00:00',
+      );
+
+      // 日期时间（不带秒）
+      time = stringToTime(
+        '2020-10-01 10:00',
+        DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE,
+      );
+      expect(
+        formatDateTime(
+          time!.millisecondsSinceEpoch,
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE,
+        ),
+        '2020-10-01 10:00',
+      );
+
+      // 纯日期
+      time = stringToTime('2020-10-01', DATE_YEAR_MONTH_DATE);
+      expect(
+        formatDateTime(
+          time!.millisecondsSinceEpoch,
+          format: DATE_YEAR_MONTH_DATE,
+        ),
+        '2020-10-01',
+      );
+
+      time = stringToTime(
+        '2020.10.01 10:00:00',
+        DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND_DOT,
+      );
+      expect(
+        formatDateTime(
+          time!.millisecondsSinceEpoch,
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2020-10-01 10:00:00',
+      );
+
+      // 日期时间（不带秒）
+      time = stringToTime(
+        '2020.10.01 10:00',
+        DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_DOT,
+      );
+      expect(
+        formatDateTime(
+          time!.millisecondsSinceEpoch,
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE,
+        ),
+        '2020-10-01 10:00',
+      );
+
+      // 纯日期
+      time = stringToTime('2020.10.01', DATE_YEAR_MONTH_DATE_DOT);
+      expect(
+        formatDateTime(
+          time!.millisecondsSinceEpoch,
+          format: DATE_YEAR_MONTH_DATE,
+        ),
+        '2020-10-01',
+      );
+
+      time = stringToTime(
+        '2020/10/01 10:00:00',
+        DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND_SLASH,
+      );
+      expect(
+        formatDateTime(
+          time!.millisecondsSinceEpoch,
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2020-10-01 10:00:00',
+      );
+
+      // 日期时间（不带秒）
+      time = stringToTime(
+        '2020/10/01 10:00',
+        DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SLASH,
+      );
+      expect(
+        formatDateTime(
+          time!.millisecondsSinceEpoch,
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE,
+        ),
+        '2020-10-01 10:00',
+      );
+
+      // 纯日期
+      time = stringToTime('2020/10/01', DATE_YEAR_MONTH_DATE_SLASH);
+      expect(
+        formatDateTime(
+          time!.millisecondsSinceEpoch,
+          format: DATE_YEAR_MONTH_DATE,
+        ),
+        '2020-10-01',
+      );
+    });
   });
 }

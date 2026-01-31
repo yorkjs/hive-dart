@@ -86,7 +86,7 @@ void main() {
   });
 
   group('time', () {
-    test('day', () {
+    test('hour', () {
       var ts = DateTime.parse('2020-10-10 10:01:01').millisecondsSinceEpoch;
 
       expect(
@@ -494,8 +494,8 @@ void main() {
     test('time_range_optimize', () {
       // isHour
       var date = DateTime.utc(2025, 2, 10, 10, 1, 1);
-      var startTime = startOfDay(date.millisecondsSinceEpoch);
-      var endTime = endOfDay(date.millisecondsSinceEpoch);
+      var startTime = startOfHour(date.millisecondsSinceEpoch);
+      var endTime = endOfHour(date.millisecondsSinceEpoch);
       var isHour = false;
       var isDay = false;
       var isWeek = false;
@@ -525,13 +525,51 @@ void main() {
         ),
       );
 
-      expect(isHour, false);
-      expect(isDay, true);
+      expect(isHour, true);
+      expect(isDay, false);
       expect(isWeek, false);
       expect(isMonth, false);
       expect(isRange, false);
 
       // isHour 但是不传 isHour 函数
+
+      startTime = startOfHour(date.millisecondsSinceEpoch);
+      endTime = endOfHour(date.millisecondsSinceEpoch);
+      isHour = false;
+      isDay = false;
+      isWeek = false;
+      isMonth = false;
+      isRange = false;
+
+      optimizeTimeRange(
+        startTime,
+        endTime,
+        ITimeRangeOptimizer(
+          isDay: (day) {
+            isDay = true;
+          },
+          isWeek: (week) {
+            isWeek = true;
+          },
+          isMonth: (month) {
+            isMonth = true;
+          },
+          isRange: (start, end) {
+            isRange = true;
+            expect(start, startTime);
+            expect(end, endTime);
+          },
+        ),
+      );
+
+      expect(isHour, false);
+      expect(isDay, false);
+      expect(isWeek, false);
+      expect(isMonth, false);
+      expect(isRange, true);
+
+      // isDay 但是不传 isDay 函数
+
       startTime = startOfDay(date.millisecondsSinceEpoch);
       endTime = endOfDay(date.millisecondsSinceEpoch);
       isHour = false;
@@ -544,6 +582,9 @@ void main() {
         startTime,
         endTime,
         ITimeRangeOptimizer(
+          isHour: (hour) {
+            isHour = true;
+          },
           isDay: (day) {
             isDay = true;
             expect(day, startTime);
