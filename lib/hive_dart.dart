@@ -52,3 +52,4 @@ export 'src/parse/phone_number.dart';
 
 export 'src/util/date.dart';
 export 'src/util/number.dart';
+export 'src/util/string.dart';
