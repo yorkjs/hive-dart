@@ -1,5 +1,40 @@
 import 'package:hive_dart/hive_dart.dart';
 
+/// 获取某个小时开始时间
+int startOfHour(int timestamp) {
+  final date = DateTime.fromMillisecondsSinceEpoch(timestamp);
+  return DateTime(
+    date.year,
+    date.month,
+    date.day,
+    date.hour,
+  ).millisecondsSinceEpoch;
+}
+
+/// 获取前一个小时开始时间
+int startOfPrevHour(int timestamp) {
+  return startOfHour(timestamp - MS_HOUR);
+}
+
+/// 获取下个小时开始时间
+int startOfNextHour(int timestamp) {
+  return startOfHour(timestamp + MS_HOUR);
+}
+
+/// 获取某个小时结束时间
+int endOfHour(int timestamp) {
+  final date = DateTime.fromMillisecondsSinceEpoch(timestamp);
+  return DateTime(
+    date.year,
+    date.month,
+    date.day,
+    date.hour,
+    59,
+    59,
+    999,
+  ).millisecondsSinceEpoch;
+}
+
 /// 获取某天的开始时间（毫秒时间戳）
 int startOfDay(int timestamp) {
   final date = DateTime.fromMillisecondsSinceEpoch(timestamp);
@@ -19,7 +54,15 @@ int startOfNextDay(int timestamp) {
 /// 获取某天的结束时间（毫秒时间戳）
 int endOfDay(int timestamp) {
   final date = DateTime.fromMillisecondsSinceEpoch(timestamp);
-  return DateTime(date.year, date.month, date.day, 23, 59, 59, 999).millisecondsSinceEpoch;
+  return DateTime(
+    date.year,
+    date.month,
+    date.day,
+    23,
+    59,
+    59,
+    999,
+  ).millisecondsSinceEpoch;
 }
 
 /// 获取某周的开始时间
@@ -47,7 +90,15 @@ int endOfWeek(int timestamp) {
   final day = date.weekday == DateTime.sunday ? 0 : date.weekday; // 和 js 保持一致
   final offset = (day < 0 ? -7 : 0) + 6 - day;
   final end = date.add(Duration(days: offset));
-  return DateTime(end.year, end.month, end.day, 23, 59, 59, 999).millisecondsSinceEpoch;
+  return DateTime(
+    end.year,
+    end.month,
+    end.day,
+    23,
+    59,
+    59,
+    999,
+  ).millisecondsSinceEpoch;
 }
 
 /// 获取某月的开始时间
@@ -59,7 +110,9 @@ int startOfMonth(int timestamp) {
 /// 获取前一月的开始时间（毫秒时间戳）
 int startOfPrevMonth(int timestamp) {
   final date = DateTime.fromMillisecondsSinceEpoch(timestamp);
-  final prevMonth = date.month == DateTime.january ? DateTime.december : date.month - 1;
+  final prevMonth = date.month == DateTime.january
+      ? DateTime.december
+      : date.month - 1;
   final prevYear = date.month == DateTime.january ? date.year - 1 : date.year;
   return DateTime(prevYear, prevMonth).millisecondsSinceEpoch;
 }
@@ -67,7 +120,9 @@ int startOfPrevMonth(int timestamp) {
 /// 获取后一月的开始时间（毫秒时间戳）
 int startOfNextMonth(int timestamp) {
   final date = DateTime.fromMillisecondsSinceEpoch(timestamp);
-  final nextMonth = date.month == DateTime.december ? DateTime.january : date.month + 1;
+  final nextMonth = date.month == DateTime.december
+      ? DateTime.january
+      : date.month + 1;
   final nextYear = date.month == DateTime.december ? date.year + 1 : date.year;
   return DateTime(nextYear, nextMonth).millisecondsSinceEpoch;
 }
@@ -75,23 +130,32 @@ int startOfNextMonth(int timestamp) {
 /// 获取某月的结束时间
 int endOfMonth(int timestamp) {
   final date = DateTime.fromMillisecondsSinceEpoch(timestamp);
-  final nextMonth = date.month == DateTime.december ? DateTime.january : date.month + 1;
+  final nextMonth = date.month == DateTime.december
+      ? DateTime.january
+      : date.month + 1;
   final nextYear = date.month == DateTime.december ? date.year + 1 : date.year;
   final firstDayOfNextMonth = DateTime(nextYear, nextMonth);
   final lastDayOfMonth = firstDayOfNextMonth.subtract(const Duration(days: 1));
   return DateTime(
-          lastDayOfMonth.year, lastDayOfMonth.month, lastDayOfMonth.day,
-          23, 59, 59, 999).millisecondsSinceEpoch;
+    lastDayOfMonth.year,
+    lastDayOfMonth.month,
+    lastDayOfMonth.day,
+    23,
+    59,
+    59,
+    999,
+  ).millisecondsSinceEpoch;
 }
 
-
 class ITimeRangeOptimizer {
+  final void Function(int hour)? isHour;
   final void Function(int day)? isDay;
   final void Function(int week)? isWeek;
   final void Function(int month)? isMonth;
   final void Function(int start, int end) isRange;
 
   ITimeRangeOptimizer({
+    this.isHour,
     this.isDay,
     this.isWeek,
     this.isMonth,
@@ -105,6 +169,9 @@ void optimizeTimeRange(
   int endTimestamp,
   ITimeRangeOptimizer optimizer,
 ) {
+  final startHour = startOfHour(startTimestamp);
+  final endHour = endOfHour(startTimestamp);
+
   final startDay = startOfDay(startTimestamp);
   final endDay = endOfDay(startTimestamp);
 
@@ -114,16 +181,23 @@ void optimizeTimeRange(
   final startMonth = startOfMonth(startTimestamp);
   final endMonth = endOfMonth(startTimestamp);
 
-  if (startTimestamp == startDay && endTimestamp == endDay && optimizer.isDay != null) {
+  if (startTimestamp == startHour &&
+      endTimestamp == endHour &&
+      optimizer.isHour != null) {
+    optimizer.isHour!(startTimestamp);
+  } else if (startTimestamp == startDay &&
+      endTimestamp == endDay &&
+      optimizer.isDay != null) {
     optimizer.isDay!(startTimestamp);
-  }
-  else if (startTimestamp == startWeek && endTimestamp == endWeek && optimizer.isWeek != null) {
+  } else if (startTimestamp == startWeek &&
+      endTimestamp == endWeek &&
+      optimizer.isWeek != null) {
     optimizer.isWeek!(startTimestamp);
-  }
-  else if (startTimestamp == startMonth && endTimestamp == endMonth && optimizer.isMonth != null) {
+  } else if (startTimestamp == startMonth &&
+      endTimestamp == endMonth &&
+      optimizer.isMonth != null) {
     optimizer.isMonth!(startTimestamp);
-  }
-  else {
+  } else {
     optimizer.isRange(startTimestamp, endTimestamp);
   }
 }

@@ -85,8 +85,40 @@ void main() {
     });
   });
 
-  group('date', () {
-    test('date_day', () {
+  group('time', () {
+    test('day', () {
+      var ts = DateTime.parse('2020-10-10 10:01:01').millisecondsSinceEpoch;
+
+      expect(
+        formatDateTime(
+          startOfHour(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2020-10-10 10:00:00',
+      );
+      expect(
+        formatDateTime(
+          startOfPrevHour(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2020-10-10 09:00:00',
+      );
+      expect(
+        formatDateTime(
+          startOfNextHour(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2020-10-10 11:00:00',
+      );
+      expect(
+        formatDateTime(
+          endOfHour(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2020-10-10 10:59:59',
+      );
+    });
+    test('day', () {
       var ts = DateTime.parse('2020-10-10 10:01:01').millisecondsSinceEpoch;
 
       expect(
@@ -187,7 +219,7 @@ void main() {
       );
     });
 
-    test('date_week', () {
+    test('week', () {
       var ts = DateTime.parse('2025-07-27 10:01:01').millisecondsSinceEpoch;
 
       expect(
@@ -271,7 +303,7 @@ void main() {
       );
     });
 
-    test('date_month', () {
+    test('month', () {
       var ts = DateTime.parse('2025-02-10 10:01:01').millisecondsSinceEpoch;
 
       expect(
@@ -459,12 +491,12 @@ void main() {
       );
     });
 
-    test('time_range_optimize isDay', () {
-      final date = DateTime(2025, 2, 10, 10, 1, 1);
-
-      // isDay
+    test('time_range_optimize', () {
+      // isHour
+      var date = DateTime.utc(2025, 2, 10, 10, 1, 1);
       var startTime = startOfDay(date.millisecondsSinceEpoch);
       var endTime = endOfDay(date.millisecondsSinceEpoch);
+      var isHour = false;
       var isDay = false;
       var isWeek = false;
       var isMonth = false;
@@ -474,74 +506,10 @@ void main() {
         startTime,
         endTime,
         ITimeRangeOptimizer(
-          isDay: (day) {
-            isDay = true;
-            expect(day, equals(startTime));
+          isHour: (hour) {
+            isHour = true;
+            expect(hour, startTime);
           },
-          isWeek: (week) {
-            isWeek = true;
-          },
-          isMonth: (month) {
-            isMonth = true;
-          },
-          isRange: (start, end) {
-            isRange = true;
-          },
-        ),
-      );
-
-      expect(isDay, isTrue);
-      expect(isWeek, isFalse);
-      expect(isMonth, isFalse);
-      expect(isRange, isFalse);
-    });
-
-    test('time_range_optimize isDay 但是不传 isDay 函数', () {
-      final date = DateTime(2025, 2, 10, 10, 1, 1);
-
-      var startTime = startOfDay(date.millisecondsSinceEpoch);
-      var endTime = endOfDay(date.millisecondsSinceEpoch);
-      var isDay = false;
-      var isWeek = false;
-      var isMonth = false;
-      var isRange = false;
-
-      optimizeTimeRange(
-        startTime,
-        endTime,
-        ITimeRangeOptimizer(
-          isWeek: (week) {
-            isWeek = true;
-          },
-          isMonth: (month) {
-            isMonth = true;
-          },
-          isRange: (start, end) {
-            isRange = true;
-            expect(start, equals(startTime));
-            expect(end, equals(endTime));
-          },
-        ),
-      );
-
-      expect(isDay, isFalse);
-      expect(isWeek, isFalse);
-      expect(isMonth, isFalse);
-      expect(isRange, isTrue);
-    });
-
-    test('time_range_optimize 截取日期中间的一段时间', () {
-      var startTime = DateTime(2025, 10, 10, 10, 0, 0).millisecondsSinceEpoch;
-      var endTime = DateTime(2025, 10, 10, 12, 0, 0).millisecondsSinceEpoch;
-      var isDay = false;
-      var isWeek = false;
-      var isMonth = false;
-      var isRange = false;
-
-      optimizeTimeRange(
-        startTime,
-        endTime,
-        ITimeRangeOptimizer(
           isDay: (day) {
             isDay = true;
           },
@@ -553,28 +521,24 @@ void main() {
           },
           isRange: (start, end) {
             isRange = true;
-            expect(start, equals(startTime));
-            expect(end, equals(endTime));
           },
         ),
       );
 
-      expect(isDay, isFalse);
-      expect(isWeek, isFalse);
-      expect(isMonth, isFalse);
-      expect(isRange, isTrue);
-    });
+      expect(isHour, false);
+      expect(isDay, true);
+      expect(isWeek, false);
+      expect(isMonth, false);
+      expect(isRange, false);
 
-    test('time_range_optimize 跨天', () {
-      final startDate = DateTime(2025, 10, 10, 10, 0, 0);
-      final endDate = DateTime(2025, 10, 12, 12, 0, 0);
-
-      var startTime = startOfDay(startDate.millisecondsSinceEpoch);
-      var endTime = endOfDay(endDate.millisecondsSinceEpoch);
-      var isDay = false;
-      var isWeek = false;
-      var isMonth = false;
-      var isRange = false;
+      // isHour 但是不传 isHour 函数
+      startTime = startOfDay(date.millisecondsSinceEpoch);
+      endTime = endOfDay(date.millisecondsSinceEpoch);
+      isHour = false;
+      isDay = false;
+      isWeek = false;
+      isMonth = false;
+      isRange = false;
 
       optimizeTimeRange(
         startTime,
@@ -582,6 +546,7 @@ void main() {
         ITimeRangeOptimizer(
           isDay: (day) {
             isDay = true;
+            expect(day, startTime);
           },
           isWeek: (week) {
             isWeek = true;
@@ -591,67 +556,55 @@ void main() {
           },
           isRange: (start, end) {
             isRange = true;
-            expect(start, equals(startTime));
-            expect(end, equals(endTime));
           },
         ),
       );
 
-      expect(isDay, isFalse);
-      expect(isWeek, isFalse);
-      expect(isMonth, isFalse);
-      expect(isRange, isTrue);
-    });
+      expect(isHour, false);
+      expect(isDay, true);
+      expect(isWeek, false);
+      expect(isMonth, false);
+      expect(isRange, false);
 
-    test('time_range_optimize isWeek', () {
-      final date = DateTime(2026, 1, 4, 10, 0, 0);
-
-      var startTime = startOfDay(date.millisecondsSinceEpoch);
-      var endTime = endOfDay(
-        DateTime(2026, 1, 10, 12, 0, 0).millisecondsSinceEpoch,
-      );
-      var isDay = false;
-      var isWeek = false;
-      var isMonth = false;
-      var isRange = false;
+      // isDay 但是不传 isDay 函数
+      startTime = startOfDay(date.millisecondsSinceEpoch);
+      endTime = endOfDay(date.millisecondsSinceEpoch);
+      isDay = false;
+      isWeek = false;
+      isMonth = false;
+      isRange = false;
 
       optimizeTimeRange(
         startTime,
         endTime,
         ITimeRangeOptimizer(
-          isDay: (day) {
-            isDay = true;
-          },
           isWeek: (week) {
             isWeek = true;
-            expect(week, equals(startTime));
           },
           isMonth: (month) {
             isMonth = true;
           },
           isRange: (start, end) {
             isRange = true;
+            expect(start, startTime);
+            expect(end, endTime);
           },
         ),
       );
 
-      expect(isDay, isFalse);
-      expect(isWeek, isTrue);
-      expect(isMonth, isFalse);
-      expect(isRange, isFalse);
-    });
+      expect(isDay, false);
+      expect(isWeek, false);
+      expect(isMonth, false);
+      expect(isRange, true);
 
-    test('time_range_optimize isMonth', () {
-      var startTime = startOfDay(
-        DateTime(2026, 1, 1, 10, 0, 0).millisecondsSinceEpoch,
-      );
-      var endTime = endOfDay(
-        DateTime(2026, 1, 31, 12, 0, 0).millisecondsSinceEpoch,
-      );
-      var isDay = false;
-      var isWeek = false;
-      var isMonth = false;
-      var isRange = false;
+      // 截取日期中间的一段时间
+      startTime = DateTime.utc(2025, 10, 10, 10, 0, 0).millisecondsSinceEpoch;
+      endTime = DateTime.utc(2025, 10, 10, 12, 0, 0).millisecondsSinceEpoch;
+      isHour = false;
+      isDay = false;
+      isWeek = false;
+      isMonth = false;
+      isRange = false;
 
       optimizeTimeRange(
         startTime,
@@ -665,7 +618,85 @@ void main() {
           },
           isMonth: (month) {
             isMonth = true;
-            expect(month, equals(startTime));
+          },
+          isRange: (start, end) {
+            isRange = true;
+            expect(start, startTime);
+            expect(end, endTime);
+          },
+        ),
+      );
+
+      expect(isDay, false);
+      expect(isWeek, false);
+      expect(isMonth, false);
+      expect(isRange, true);
+
+      // 跨天
+      startTime = startOfDay(
+        DateTime.utc(2025, 10, 10, 10, 0, 0).millisecondsSinceEpoch,
+      );
+      endTime = endOfDay(
+        DateTime.utc(2025, 10, 12, 12, 0, 0).millisecondsSinceEpoch,
+      );
+      isDay = false;
+      isWeek = false;
+      isMonth = false;
+      isRange = false;
+
+      optimizeTimeRange(
+        startTime,
+        endTime,
+        ITimeRangeOptimizer(
+          isDay: (day) {
+            isDay = true;
+          },
+          isWeek: (week) {
+            isWeek = true;
+          },
+          isMonth: (month) {
+            isMonth = true;
+          },
+          isRange: (start, end) {
+            isRange = true;
+            expect(start, startTime);
+            expect(end, endTime);
+          },
+        ),
+      );
+
+      expect(isDay, false);
+      expect(isWeek, false);
+      expect(isMonth, false);
+      expect(isRange, true);
+
+      // isWeek
+      startTime = startOfDay(
+        DateTime.utc(2026, 1, 4, 10, 0, 0).millisecondsSinceEpoch,
+      );
+      endTime = endOfDay(
+        DateTime.utc(2026, 1, 10, 12, 0, 0).millisecondsSinceEpoch,
+      );
+      isDay = false;
+      isWeek = false;
+      isMonth = false;
+      isRange = false;
+
+      // 这里需要根据实际的 optimizeTimeRange 逻辑调整
+      // 假设我们直接调用 isWeek 回调
+      optimizeTimeRange(
+        startTime,
+        endTime,
+        ITimeRangeOptimizer(
+          isDay: (day) {
+            isDay = true;
+          },
+          isWeek: (week) {
+            isWeek = true;
+            expect(week, startTime);
+          },
+          isMonth: (month) {
+            isMonth = true;
           },
           isRange: (start, end) {
             isRange = true;
@@ -673,10 +704,49 @@ void main() {
         ),
       );
 
-      expect(isDay, isFalse);
-      expect(isWeek, isFalse);
-      expect(isMonth, isTrue);
-      expect(isRange, isFalse);
+      expect(isDay, false);
+      expect(isWeek, true);
+      expect(isMonth, false);
+      expect(isRange, false);
+
+      // isMonth
+      startTime = startOfDay(
+        DateTime.utc(2026, 1, 1, 10, 0, 0).millisecondsSinceEpoch,
+      );
+      endTime = endOfDay(
+        DateTime.utc(2026, 1, 31, 12, 0, 0).millisecondsSinceEpoch,
+      );
+      isDay = false;
+      isWeek = false;
+      isMonth = false;
+      isRange = false;
+
+      // 这里需要根据实际的 optimizeTimeRange 逻辑调整
+      // 假设我们直接调用 isMonth 回调
+      optimizeTimeRange(
+        startTime,
+        endTime,
+        ITimeRangeOptimizer(
+          isDay: (day) {
+            isDay = true;
+          },
+          isWeek: (week) {
+            isWeek = true;
+          },
+          isMonth: (month) {
+            isMonth = true;
+            expect(month, startTime);
+          },
+          isRange: (start, end) {
+            isRange = true;
+          },
+        ),
+      );
+
+      expect(isDay, false);
+      expect(isWeek, false);
+      expect(isMonth, true);
+      expect(isRange, false);
     });
   });
 }

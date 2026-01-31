@@ -50,6 +50,6 @@ export 'src/normalize/version.dart';
 export 'src/parse/auth_code.dart';
 export 'src/parse/phone_number.dart';
 
-export 'src/util/date.dart';
 export 'src/util/number.dart';
 export 'src/util/string.dart';
+export 'src/util/time.dart';
