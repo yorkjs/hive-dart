@@ -44,6 +44,8 @@ export 'src/is/barcode.dart';
 export 'src/is/email.dart';
 export 'src/is/number.dart';
 export 'src/is/price.dart';
+export 'src/is/url.dart';
+export 'src/is/verify_code.dart';
 
 export 'src/normalize/duration.dart';
 export 'src/normalize/version.dart';

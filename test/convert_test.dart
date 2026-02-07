@@ -102,6 +102,7 @@ void main() {
 
       // 测试无效日期
       expect(timeToTimestamp(DateTime.fromMillisecondsSinceEpoch(0)), 0);
+      expect(timeToTimestamp(timestampToTime(0)), 0);
 
       var time = stringToTime(
         '2020-10-01 10:00:00',

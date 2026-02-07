@@ -84,3 +84,7 @@
 ## 0.2.1
 
 - 新增 truncateString, startOfHour, startOfPrevHour, startOfNextHour, endOfHour, timeToTimestamp, timestampToTime, stringToTime
+
+## 0.2.2
+
+- 新增 isUrl, isVerifyCode
