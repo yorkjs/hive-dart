@@ -97,6 +97,10 @@ void main() {
       final date = DateTime.now();
       final timestamp = date.millisecondsSinceEpoch;
 
+      final timeField = timeToTimeField(date);
+      final convertedTime = timeFieldToTime(timeField);
+      expect(timeToTimestamp(convertedTime), timestamp);
+
       expect(timeToTimestamp(date), timestamp);
       expect(timestampToTime(timestamp).millisecondsSinceEpoch, timestamp);
 
