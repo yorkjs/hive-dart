@@ -88,3 +88,5 @@
 ## 0.2.2
 
 - 新增 isUrl, isVerifyCode
+- 新增 timeToTimeField, timeFieldToTime
+- 新增 hexToRgbaObject, hexToRgbaString

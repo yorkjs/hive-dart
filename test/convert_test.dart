@@ -20,6 +20,15 @@ void main() {
       );
     });
 
+    test('hexToRgbaString', () {
+      expect(hexToRgbaString("#F00", 0.5), equals("rgba(255,0,0,0.5)"));
+      expect(hexToRgbaString("#FF0000", 0.5), equals("rgba(255,0,0,0.5)"));
+      expect(hexToRgbaString("#0F0", 0.7), equals("rgba(0,255,0,0.7)"));
+      expect(hexToRgbaString("#00FF00", 0.7), equals("rgba(0,255,0,0.7)"));
+      expect(hexToRgbaString("#00F", 0.9), equals("rgba(0,0,255,0.9)"));
+      expect(hexToRgbaString("#0000FF", 0.9), equals("rgba(0,0,255,0.9)"));
+    });
+
     test('convertDiscount', () {
       expect(discountToDisplay(8000), 8);
       expect(discountToDisplay(8800), 8.8);

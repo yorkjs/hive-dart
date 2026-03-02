@@ -13,6 +13,7 @@ export 'src/constant/phone_number.dart';
 export 'src/constant/shelf_life.dart';
 export 'src/constant/size.dart';
 
+export 'src/convert/color.dart';
 export 'src/convert/discount.dart';
 export 'src/convert/distance.dart';
 export 'src/convert/money.dart';
