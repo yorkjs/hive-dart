@@ -21,6 +21,21 @@ void main() {
       expect(isInteger(1.1), false);
     });
 
+    test('isBankCardNumber', () {
+      expect(isBankCardNumber(''), false);
+      expect(isBankCardNumber('1'), false);
+      expect(isBankCardNumber('12'), false);
+      expect(isBankCardNumber('6228480012345678'), false);
+      expect(isBankCardNumber('1234567890123'), false);
+    });
+
+    test('isIdentityCardNumber', () {
+      expect(isIdentityCardNumber(''), false);
+      expect(isIdentityCardNumber('1'), false);
+      expect(isIdentityCardNumber('12'), false);
+      expect(isIdentityCardNumber('464561561561651'), false);
+    });
+
     test('isEmail', () {
       expect(isEmail('abc@xxx.com'), true);
       expect(isEmail('a@163.com'), true);

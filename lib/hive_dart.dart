@@ -41,8 +41,10 @@ export 'src/format/shelf_life.dart';
 export 'src/format/size.dart';
 export 'src/format/week.dart';
 
+export 'src/is/bank_card_number.dart';
 export 'src/is/barcode.dart';
 export 'src/is/email.dart';
+export 'src/is/identity_card_number.dart';
 export 'src/is/number.dart';
 export 'src/is/price.dart';
 export 'src/is/url.dart';
