@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:hive_dart/hive_dart.dart';
 import 'package:test/test.dart';
 
@@ -74,6 +76,34 @@ void main() {
     });
   });
 
+  group('random', () {
+    test('randomStringByLength', () {
+      for (var i = 5; i < 100; i++) {
+        expect(randomStringByLength(i).length, i);
+        expect(randomStringByLength(i) != randomStringByLength(i), true);
+      }
+    });
+    test('randomIntegerByLength', () {
+      for (var i = 2; i < 20; i++) {
+        expect(randomIntegerByLength(i).toString().length, i);
+        expect(randomIntegerByLength(i) != randomIntegerByLength(i), true);
+      }
+    });
+    test('randomIntegerByRange', () {
+      for (int i = 2; i < 10; i++) {
+        // 计算最小值和最大值
+        final min = pow(10, i - 1).toInt();
+        final max = pow(10, i).toInt() - 1;
+
+        // 生成随机数
+        final random = randomIntegerByRange(min, max);
+
+        expect(random >= min, true);
+        expect(random < max, true);
+      }
+    });
+  });
+
   group('string', () {
     test('getStringLength', () {
       expect(getStringLength("1234"), equals(4));
@@ -106,16 +136,6 @@ void main() {
       expect(truncateString("你好呀ABC", 5), '你好...');
       expect(truncateString("你是谁你在干什么你想吃什么", 9), '你是谁你在干...');
       expect(truncateString("你是谁你在干ABC想吃什么", 9), '你是谁你在干...');
-    });
-    test('randomString', () {
-      for (int i = 5; i < 100; i++) {
-        final str1 = randomString(i);
-        final str2 = randomString(i);
-
-        expect(str1.length, equals(i));
-        expect(str2.length, equals(i));
-        expect(str1, isNot(equals(str2)));
-      }
     });
     test('renderStringTemplate', () {
       expect(
@@ -160,6 +180,18 @@ void main() {
           'negative': -100,
         }),
         equals('值：42，3.14159，-100'),
+      );
+    });
+    test('encodeURIComponent', () {
+      expect(
+        encodeURIComponent("key=123 啊啊+-*/_.!~()'"),
+        "key%3D123%20%E5%95%8A%E5%95%8A%2B-*%2F_.!~()'",
+      );
+    });
+    test('decodeURIComponent', () {
+      expect(
+        decodeURIComponent("key%3D123%20%E5%95%8A%E5%95%8A%2B-*%2F_.!~()'"),
+        "key=123 啊啊+-*/_.!~()'",
       );
     });
   });

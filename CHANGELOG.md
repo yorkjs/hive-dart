@@ -91,3 +91,4 @@
 - 新增 timeToTimeField, timeFieldToTime
 - 新增 hexToRgbaObject, hexToRgbaString
 - 新增 getStringLength, trimString, sliceString, randomString, renderStringTemplate
+- 新增 maskMobile, maskName, randomIntegerByLength, randomIntegerByRange, randomStringByLength, encodeURIComponent, decodeURIComponent

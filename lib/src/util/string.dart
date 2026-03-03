@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:convert';
 
 /// 获取字符串长度
 ///
@@ -30,26 +31,6 @@ String truncateString(String str, int maxLength) {
   return '${str.substring(0, maxLength - 3)}...';
 }
 
-/// 生成指定长度的随机字符串
-///
-/// [length] 随机字符串长度
-/// [chars] 随机字符集，默认为大小写字母和数字
-String randomString(
-  int length, {
-  String chars =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
-}) {
-  final random = Random.secure();
-  final result = List<String>.filled(length, '');
-  final charLength = chars.length;
-
-  for (int i = 0; i < length; i++) {
-    result[i] = chars[random.nextInt(charLength)];
-  }
-
-  return result.join('');
-}
-
 /// 渲染字符串模板
 ///
 /// [str] 字符串模板，例如：'你好，${name}'
@@ -66,4 +47,20 @@ String renderStringTemplate(String str, Map<String, dynamic> data) {
     // 如果找不到对应的值，返回原占位符
     return value != null ? value.toString() : match.group(0)!;
   });
+}
+
+/// 编码 URI 组件
+///
+/// [str] 要编码的字符串
+/// 返回编码后的字符串
+String encodeURIComponent(String str) {
+  return Uri.encodeComponent(str);
+}
+
+/// 解码 URI 组件
+///
+/// [str] 要解码的字符串
+/// 返回解码后的字符串
+String decodeURIComponent(String str) {
+  return Uri.decodeComponent(str);
 }

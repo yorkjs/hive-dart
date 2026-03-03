@@ -48,6 +48,9 @@ export 'src/is/price.dart';
 export 'src/is/url.dart';
 export 'src/is/verify_code.dart';
 
+export 'src/mask/mobile.dart';
+export 'src/mask/name.dart';
+
 export 'src/normalize/duration.dart';
 export 'src/normalize/version.dart';
 
@@ -55,5 +58,6 @@ export 'src/parse/auth_code.dart';
 export 'src/parse/phone_number.dart';
 
 export 'src/util/number.dart';
+export 'src/util/random.dart';
 export 'src/util/string.dart';
 export 'src/util/time.dart';
