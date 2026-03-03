@@ -90,3 +90,4 @@
 - 新增 isUrl, isVerifyCode
 - 新增 timeToTimeField, timeFieldToTime
 - 新增 hexToRgbaObject, hexToRgbaString
+- 新增 getStringLength, trimString, sliceString, randomString, renderStringTemplate

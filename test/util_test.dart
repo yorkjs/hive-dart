@@ -75,6 +75,30 @@ void main() {
   });
 
   group('string', () {
+    test('getStringLength', () {
+      expect(getStringLength("1234"), equals(4));
+      expect(getStringLength("1234你"), equals(5));
+      expect(getStringLength("1234你好"), equals(6));
+    });
+    test('trimString', () {
+      expect(trimString("\t1234"), equals('1234'));
+      expect(trimString(" 1234"), equals('1234'));
+      expect(trimString("\t 1234"), equals('1234'));
+
+      expect(trimString("1234\t"), equals('1234'));
+      expect(trimString("1234 "), equals('1234'));
+      expect(trimString("1234\t "), equals('1234'));
+
+      expect(trimString("\t1234\t "), equals('1234'));
+      expect(trimString("\t1234\n    "), equals('1234'));
+      expect(trimString("\n    1234\n    "), equals('1234'));
+    });
+    test('sliceString', () {
+      expect(sliceString("12345678", 4, 6), equals('56'));
+      expect(sliceString("1234你好", 3, 5), equals('4你'));
+      expect(sliceString("1234你好5", 5, 7), equals('好5'));
+      expect(sliceString("1234你好", 4, 6), equals('你好'));
+    });
     test('truncateString', () {
       expect(truncateString("123456789", 5), '12...');
       expect(truncateString("ABCDEFGHI", 5), 'AB...');
@@ -82,6 +106,61 @@ void main() {
       expect(truncateString("你好呀ABC", 5), '你好...');
       expect(truncateString("你是谁你在干什么你想吃什么", 9), '你是谁你在干...');
       expect(truncateString("你是谁你在干ABC想吃什么", 9), '你是谁你在干...');
+    });
+    test('randomString', () {
+      for (int i = 5; i < 100; i++) {
+        final str1 = randomString(i);
+        final str2 = randomString(i);
+
+        expect(str1.length, equals(i));
+        expect(str2.length, equals(i));
+        expect(str1, isNot(equals(str2)));
+      }
+    });
+    test('renderStringTemplate', () {
+      expect(
+        renderStringTemplate('你好，\${name}', {'name': '张三'}),
+        equals('你好，张三'),
+      );
+      expect(
+        renderStringTemplate('你好，\${name1}，\${name2}', {
+          'name1': '张三',
+          'name2': '李四',
+        }),
+        equals('你好，张三，李四'),
+      );
+      expect(
+        renderStringTemplate('你好，\${name1}，\${name3}。', {'name1': '张三'}),
+        equals('你好，张三，\${name3}。'),
+      );
+      expect(
+        renderStringTemplate('你好，\${value}。', {'value': 10}),
+        equals('你好，10。'),
+      );
+      expect(
+        renderStringTemplate('你好，\${value}。', {'value': 10.11}),
+        equals('你好，10.11。'),
+      );
+      expect(
+        renderStringTemplate('你好，\${value}。', {'value': true}),
+        equals('你好，true。'),
+      );
+      expect(
+        renderStringTemplate('你好，\${value}。', {'value': false}),
+        equals('你好，false。'),
+      );
+      expect(
+        renderStringTemplate('你好，\${value}。', {'value': null}),
+        equals('你好，\${value}。'),
+      );
+      expect(
+        renderStringTemplate('值：\${int}，\${double}，\${negative}', {
+          'int': 42,
+          'double': 3.14159,
+          'negative': -100,
+        }),
+        equals('值：42，3.14159，-100'),
+      );
     });
   });
 
