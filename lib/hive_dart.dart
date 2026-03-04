@@ -50,6 +50,7 @@ export 'src/is/price.dart';
 export 'src/is/url.dart';
 export 'src/is/verify_code.dart';
 
+export 'src/mask/email.dart';
 export 'src/mask/mobile.dart';
 export 'src/mask/name.dart';
 

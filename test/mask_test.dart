@@ -3,6 +3,14 @@ import 'package:test/test.dart';
 
 void main() {
   group('mask', () {
+    test('maskEmail', () {
+      expect(maskEmail(''), "");
+      expect(maskEmail('你'), "你");
+      expect(maskEmail('a@example.com'), "***@example.com");
+      expect(maskEmail('ab@example.com'), "***b@example.com");
+      expect(maskEmail('abc@example.com'), "***c@example.com");
+      expect(maskEmail('@example.com'), '@example.com');
+    });
     test('maskMobile', () {
       expect(maskMobile(''), "");
       expect(maskMobile('你'), "你");

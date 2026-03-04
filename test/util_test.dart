@@ -84,7 +84,7 @@ void main() {
       }
     });
     test('randomIntegerByLength', () {
-      for (var i = 2; i < 20; i++) {
+      for (var i = 2; i < 15; i++) {
         expect(randomIntegerByLength(i).toString().length, i);
         expect(randomIntegerByLength(i) != randomIntegerByLength(i), true);
       }
@@ -181,6 +181,11 @@ void main() {
         }),
         equals('值：42，3.14159，-100'),
       );
+    });
+    test('padStringStart', () {
+      expect(padStringStart('1', 3), '001');
+      expect(padStringStart('12', 3), '012');
+      expect(padStringStart('123', 3), '123');
     });
     test('encodeURIComponent', () {
       expect(

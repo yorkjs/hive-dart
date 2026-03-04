@@ -31,6 +31,15 @@ String truncateString(String str, int maxLength) {
   return '${str.substring(0, maxLength - 3)}...';
 }
 
+/// 补全字符串开头，不足 length 个字符用 0 填充
+///
+/// [str] 要补全的字符串
+/// [length] 目标长度
+/// 返回补全后的字符串
+String padStringStart(String str, int length) {
+  return str.padLeft(length, '0');
+}
+
 /// 渲染字符串模板
 ///
 /// [str] 字符串模板，例如：'你好，${name}'

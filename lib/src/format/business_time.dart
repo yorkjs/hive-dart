@@ -1,8 +1,10 @@
+import '../util/string.dart';
+
 String formatHourMinutes(int value) {
   final hours = value ~/ 60;
   final minutes = value % 60;
 
-  return '${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}';
+  return '${padStringStart(hours.toString(), 2)}:${padStringStart(minutes.toString(), 2)}';
 }
 
 // 营业时间时段范围为 [0, 2880] 可跨天, 0-1440 为当天，1440-2880 为次日
