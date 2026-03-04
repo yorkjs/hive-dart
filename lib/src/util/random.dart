@@ -1,10 +1,16 @@
 import 'dart:math';
 
+import '../convert/time.dart';
+import './string.dart';
+
 /// 生成指定长度的随机整数
 ///
 /// [length] 数字长度
 /// 返回指定长度的随机整数
 int randomIntegerByLength(int length) {
+  if (length <= 0) {
+    return 0;
+  }
   final random = Random();
   final buffer = StringBuffer();
 
@@ -49,4 +55,26 @@ String randomStringByLength(
     result[i] = chars[random.nextInt(charLength)];
   }
   return result.join('');
+}
+
+/// 根据当前时间生成随机字符串，可通过 tailLength 控制重复的概率
+///
+/// [tailLength] 随机字符串尾端数字长度
+/// 返回根据当前时间生成的随机字符串
+String randomStringByCurrentTime(int tailLength) {
+  final timeField = timeToTimeField(DateTime.now());
+
+  final year = timeField.year;
+  final month = padStringStart(timeField.month.toString(), 2);
+  final date = padStringStart(timeField.date.toString(), 2);
+  final hour = padStringStart(timeField.hour.toString(), 2);
+  final minute = padStringStart(timeField.minute.toString(), 2);
+  final second = padStringStart(timeField.second.toString(), 2);
+  final millisecond = padStringStart(timeField.millisecond.toString(), 3);
+
+  var timeStr = "$year$month$date$hour$minute$second$millisecond";
+  if (tailLength > 0) {
+    timeStr += randomIntegerByLength(tailLength).toString();
+  }
+  return timeStr;
 }

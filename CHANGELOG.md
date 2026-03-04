@@ -90,6 +90,7 @@
 - 新增 isUrl, isVerifyCode, isBankCardNumber, isIdentityCardNumber
 - 新增 timeToTimeField, timeFieldToTime
 - 新增 hexToRgbaObject, hexToRgbaString
-- 新增 getStringLength, trimString, sliceString, randomString, renderStringTemplate
-- 新增 maskMobile, maskName, randomIntegerByLength, randomIntegerByRange, randomStringByLength, encodeURIComponent, decodeURIComponent
-- 新增 maskEmail, padStringStart
+- 新增 getStringLength, getStringWidth, trimString, sliceString, randomString, renderStringTemplate, padStringStart
+- 新增 maskMobile, maskEmail, maskName
+- 新增 randomIntegerByLength, randomIntegerByRange, randomStringByLength, randomStringByCurrentTime
+- 新增 normalizeUrl, toProtocolRelativeUrl, encodeUriComponent, decodeUriComponent

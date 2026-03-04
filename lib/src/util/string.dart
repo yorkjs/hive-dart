@@ -1,11 +1,31 @@
 import 'dart:math';
 import 'dart:convert';
 
-/// 获取字符串长度
+/// 获取字符串字符数量
 ///
-/// 注意：中文算 1 个字符
+/// 注意：中文和英文都算 1 个字符
 int getStringLength(String str) {
   return str.length;
+}
+
+/// 获取字符串宽度，此函数常用于排版辅助计算
+///
+/// 注意：中文算 2 个单位，英文数字算 1 个单位
+int getStringWidth(String str) {
+  if (str.isEmpty) {
+    return 0;
+  }
+
+  int wideCount = 0;
+  for (int i = 0; i < str.length; i++) {
+    final codeUnit = str.codeUnitAt(i);
+    // 判断是否为宽字符（非 ASCII 或全角字符）
+    if (codeUnit > 0xFF || (codeUnit >= 0xFF61 && codeUnit <= 0xFF9F)) {
+      wideCount++;
+    }
+  }
+
+  return wideCount * 2 + (str.length - wideCount);
 }
 
 /// 移除字符串开头和结尾的空白符
@@ -56,20 +76,4 @@ String renderStringTemplate(String str, Map<String, dynamic> data) {
     // 如果找不到对应的值，返回原占位符
     return value != null ? value.toString() : match.group(0)!;
   });
-}
-
-/// 编码 URI 组件
-///
-/// [str] 要编码的字符串
-/// 返回编码后的字符串
-String encodeURIComponent(String str) {
-  return Uri.encodeComponent(str);
-}
-
-/// 解码 URI 组件
-///
-/// [str] 要解码的字符串
-/// 返回解码后的字符串
-String decodeURIComponent(String str) {
-  return Uri.decodeComponent(str);
 }

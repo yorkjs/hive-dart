@@ -102,6 +102,14 @@ void main() {
         expect(random < max, true);
       }
     });
+    test('randomStringByCurrentTime', () {
+      expect(randomStringByCurrentTime(-1).length, 17);
+      expect(randomStringByCurrentTime(0).length, 17);
+      expect(randomStringByCurrentTime(3).length, 20);
+      expect(RegExp(r'^\d+$').hasMatch(randomStringByCurrentTime(3)), true);
+      final currentYear = DateTime.now().year.toString();
+      expect(randomStringByCurrentTime(3).startsWith(currentYear), true);
+    });
   });
 
   group('string', () {
@@ -109,6 +117,15 @@ void main() {
       expect(getStringLength("1234"), equals(4));
       expect(getStringLength("1234你"), equals(5));
       expect(getStringLength("1234你好"), equals(6));
+    });
+    test('getStringWidth', () {
+      expect(getStringWidth("12"), 2);
+      expect(getStringWidth("12A"), 3);
+      expect(getStringWidth("12Aa"), 4);
+      expect(getStringWidth("12Aa啊"), 6);
+      expect(getStringWidth("12Aa啊_"), 7);
+      expect(getStringWidth("12Aa啊_，"), 9);
+      expect(getStringWidth("12Aa啊_，。"), 11);
     });
     test('trimString', () {
       expect(trimString("\t1234"), equals('1234'));
@@ -186,18 +203,6 @@ void main() {
       expect(padStringStart('1', 3), '001');
       expect(padStringStart('12', 3), '012');
       expect(padStringStart('123', 3), '123');
-    });
-    test('encodeURIComponent', () {
-      expect(
-        encodeURIComponent("key=123 啊啊+-*/_.!~()'"),
-        "key%3D123%20%E5%95%8A%E5%95%8A%2B-*%2F_.!~()'",
-      );
-    });
-    test('decodeURIComponent', () {
-      expect(
-        decodeURIComponent("key%3D123%20%E5%95%8A%E5%95%8A%2B-*%2F_.!~()'"),
-        "key=123 啊啊+-*/_.!~()'",
-      );
     });
   });
 
@@ -904,6 +909,34 @@ void main() {
       expect(isWeek, false);
       expect(isMonth, true);
       expect(isRange, false);
+    });
+  });
+
+  group('url', () {
+    test('encodeUriComponent', () {
+      expect(
+        encodeUriComponent("key=123 啊啊+-*/_.!~()'"),
+        "key%3D123%20%E5%95%8A%E5%95%8A%2B-*%2F_.!~()'",
+      );
+    });
+    test('decodeUriComponent', () {
+      expect(
+        decodeUriComponent("key%3D123%20%E5%95%8A%E5%95%8A%2B-*%2F_.!~()'"),
+        "key=123 啊啊+-*/_.!~()'",
+      );
+    });
+    test('normalizeUrl', () {
+      expect(normalizeUrl('http://example.com'), 'http://example.com');
+      expect(normalizeUrl('https://example.com'), 'https://example.com');
+      expect(normalizeUrl('//example.com'), 'https://example.com');
+      expect(normalizeUrl('example.com'), 'https://example.com');
+    });
+
+    test('toProtocolRelativeUrl', () {
+      expect(toProtocolRelativeUrl('http://example.com'), '//example.com');
+      expect(toProtocolRelativeUrl('https://example.com'), '//example.com');
+      expect(toProtocolRelativeUrl('//example.com'), '//example.com');
+      expect(toProtocolRelativeUrl('example.com'), '//example.com');
     });
   });
 }
