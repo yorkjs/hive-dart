@@ -94,3 +94,4 @@
 - 新增 maskMobile, maskEmail, maskName
 - 新增 randomIntegerByLength, randomIntegerByRange, randomStringByLength, randomStringByCurrentTime
 - 新增 normalizeUrl, toProtocolRelativeUrl, encodeUriComponent, decodeUriComponent
+- 新增 darkenColor, lightenColor, hasSpecialCharacters, removeSpecialCharacters

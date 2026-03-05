@@ -1,6 +1,3 @@
-import 'dart:math';
-import 'dart:convert';
-
 /// 获取字符串字符数量
 ///
 /// 注意：中文和英文都算 1 个字符
@@ -51,15 +48,6 @@ String truncateString(String str, int maxLength) {
   return '${str.substring(0, maxLength - 3)}...';
 }
 
-/// 补全字符串开头，不足 length 个字符用 0 填充
-///
-/// [str] 要补全的字符串
-/// [length] 目标长度
-/// 返回补全后的字符串
-String padStringStart(String str, int length) {
-  return str.padLeft(length, '0');
-}
-
 /// 渲染字符串模板
 ///
 /// [str] 字符串模板，例如：'你好，${name}'
@@ -76,4 +64,41 @@ String renderStringTemplate(String str, Map<String, dynamic> data) {
     // 如果找不到对应的值，返回原占位符
     return value != null ? value.toString() : match.group(0)!;
   });
+}
+
+/// 补全字符串开头，不足 length 个字符用 0 填充
+///
+/// [str] 要补全的字符串
+/// [length] 目标长度
+/// 返回补全后的字符串
+String padStringStart(String str, int length) {
+  return str.padLeft(length, '0');
+}
+
+/// 判断字符串是否包含特殊字符
+///
+/// [str] 目标字符串
+/// 返回是否包含特殊字符
+bool hasSpecialCharacters(String str) {
+  if (str.isEmpty) {
+    return false;
+  }
+  final pattern = RegExp(
+    r'''[^ \u4e00-\u9fa5a-zA-Z0-9，。、；：！“”‘’（）【】《》？～·—…\.,;:!?"'()\[\]{}<>@#&%￥$_\-]''',
+  );
+  return pattern.hasMatch(str);
+}
+
+/// 移除字符串中的特殊字符
+///
+/// [str] 目标字符串
+/// 返回清理后的字符串
+String removeSpecialCharacters(String str) {
+  if (str.isEmpty) {
+    return '';
+  }
+  final pattern = RegExp(
+    r'''[^ \u4e00-\u9fa5a-zA-Z0-9，。、；：！“”‘’（）【】《》？～·—…\.,;:!?"'()\[\]{}<>@#&%￥$_\-]''',
+  );
+  return str.replaceAll(pattern, '');
 }

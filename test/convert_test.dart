@@ -21,12 +21,17 @@ void main() {
     });
 
     test('hexToRgbaString', () {
-      expect(hexToRgbaString("#F00", 0.5), equals("rgba(255,0,0,0.5)"));
-      expect(hexToRgbaString("#FF0000", 0.5), equals("rgba(255,0,0,0.5)"));
-      expect(hexToRgbaString("#0F0", 0.7), equals("rgba(0,255,0,0.7)"));
-      expect(hexToRgbaString("#00FF00", 0.7), equals("rgba(0,255,0,0.7)"));
-      expect(hexToRgbaString("#00F", 0.9), equals("rgba(0,0,255,0.9)"));
-      expect(hexToRgbaString("#0000FF", 0.9), equals("rgba(0,0,255,0.9)"));
+      expect(hexToRgbaString("#F00", 0.5), "rgba(255,0,0,0.5)");
+      expect(hexToRgbaString("#FF0000", 0.5), "rgba(255,0,0,0.5)");
+      expect(hexToRgbaString("#0F0", 0.7), "rgba(0,255,0,0.7)");
+      expect(hexToRgbaString("#00FF00", 0.7), "rgba(0,255,0,0.7)");
+      expect(hexToRgbaString("#00F", 0.9), "rgba(0,0,255,0.9)");
+      expect(hexToRgbaString("#0000FF", 0.9), "rgba(0,0,255,0.9)");
+
+      expect(darkenColor("#ff0000", 0.2), "#990000");
+      expect(lightenColor("#ff0000", 0.2), "#ff6666");
+      expect(lightenColor("#ff000000", 0.2), "#ff666600");
+      expect(lightenColor("#ff0000FF", 0.2), "#ff6666");
     });
 
     test('convertDiscount', () {

@@ -204,6 +204,23 @@ void main() {
       expect(padStringStart('12', 3), '012');
       expect(padStringStart('123', 3), '123');
     });
+    test('hasSpecialCharacters', () {
+      expect(hasSpecialCharacters('abc,[1]23. 你好，【世界】！'), false);
+      expect(hasSpecialCharacters('abc,123. \t\n'), true);
+      expect(hasSpecialCharacters('abc,123.☺️'), true);
+      expect(hasSpecialCharacters(' abc,  123. '), false);
+    });
+
+    test('removeSpecialCharacters', () {
+      expect(
+        removeSpecialCharacters('abc,[1]23. 你好，【世界】！'),
+        'abc,[1]23. 你好，【世界】！',
+      );
+      expect(removeSpecialCharacters('abc,123.\t\n'), 'abc,123.');
+      expect(removeSpecialCharacters('a☺️bc,☺️123.^456☺️%'), 'abc,123.456%');
+      expect(removeSpecialCharacters('a☺️bc，123。☺️'), 'abc，123。');
+      expect(removeSpecialCharacters(' abc,  123. '), ' abc,  123. ');
+    });
   });
 
   group('time', () {
