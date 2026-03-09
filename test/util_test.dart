@@ -74,6 +74,49 @@ void main() {
       expect(truncateNumber(1234567.89, decimals: 1), '1234567.8');
       expect(truncateNumber(1234567.89, decimals: 3), '1234567.890');
     });
+
+    test('parseInteger', () {
+
+      expect(parseInteger(' 123'), 123);
+      expect(parseInteger('123 '), 123);
+      expect(parseInteger(' 123 '), 123);
+      expect(parseInteger('123'), 123);
+      expect(parseInteger('-123'), -123);
+      expect(parseInteger('+123'), 123);
+      expect(parseInteger('123px'), 123);
+      expect(parseInteger('px123'), null);
+      expect(parseInteger('123.456'), 123);
+      expect(parseInteger('123.456px'), 123);
+
+      expect(parseInteger('101'), 101);
+      expect(parseInteger('101', 2), 5);
+      expect(parseInteger('101a'), 101);
+      expect(parseInteger('101a', 2), 5);
+
+      expect(parseInteger('0XFF'), 255);
+      expect(parseInteger('0XFF', 16), 255);
+      expect(parseInteger('0xFF'), 255);
+      expect(parseInteger('0xFF', 16), 255);
+
+    });
+
+    test('parseNumber', () {
+
+      expect(parseNumber(' 123'), 123);
+      expect(parseNumber('123 '), 123);
+      expect(parseNumber(' 123 '), 123);
+      expect(parseNumber('123'), 123);
+      expect(parseNumber('-123'), -123);
+      expect(parseNumber('+123'), 123);
+      expect(parseNumber('123px'), 123);
+      expect(parseNumber('px123'), null);
+      expect(parseNumber('123.456'), 123.456);
+      expect(parseNumber('123.456px'), 123.456);
+
+      expect(parseNumber('0xFF'), 0);
+      expect(parseNumber('0XFF'), 0);
+
+    });
   });
 
   group('random', () {

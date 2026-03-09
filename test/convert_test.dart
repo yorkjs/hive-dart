@@ -76,6 +76,10 @@ void main() {
       expect(calculateRate(5, 100), 500);
       expect(calculateRate(5, 1000), 50);
       expect(calculateRate(5, 10000), 5);
+      expect(applyRate(1000, 0), 0);
+      expect(applyRate(1000, 1000), 100);
+      expect(applyRate(1000, 10000), 1000);
+      expect(applyRate(1000, 245), 24);
     });
 
     test('convertWeight', () {
