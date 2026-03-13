@@ -117,6 +117,12 @@ void main() {
       expect(parseNumber('0XFF'), 0);
 
     });
+
+    test('hasDecimal', () {
+      expect(hasDecimal(1), false);
+      expect(hasDecimal(1.0), false);
+      expect(hasDecimal(1.1), true);
+    });
   });
 
   group('random', () {
@@ -152,6 +158,24 @@ void main() {
       expect(RegExp(r'^\d+$').hasMatch(randomStringByCurrentTime(3)), true);
       final currentYear = DateTime.now().year.toString();
       expect(randomStringByCurrentTime(3).startsWith(currentYear), true);
+    });
+  });
+
+  group('rate', () {
+    test('calculateRate', () {
+      expect(calculateRate(10, 100), 1000);
+      expect(calculateRate(5, 1), 50000);
+      expect(calculateRate(5, 5), 10000);
+      expect(calculateRate(5, 10), 5000);
+      expect(calculateRate(5, 100), 500);
+      expect(calculateRate(5, 1000), 50);
+      expect(calculateRate(5, 10000), 5);
+    });
+    test('applyRate', () {
+      expect(applyRate(1000, 0), 0);
+      expect(applyRate(1000, 1000), 100);
+      expect(applyRate(1000, 10000), 1000);
+      expect(applyRate(1000, 245), 24);
     });
   });
 
@@ -267,6 +291,113 @@ void main() {
   });
 
   group('time', () {
+    test('parse', () {
+
+      var time = parseTime(
+        '2020-10-01 10:00:00',
+        DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+      );
+      expect(
+        formatDateTime(
+          time!.millisecondsSinceEpoch,
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2020-10-01 10:00:00',
+      );
+
+      // 日期时间（不带秒）
+      time = parseTime(
+        '2020-10-01 10:00',
+        DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE,
+      );
+      expect(
+        formatDateTime(
+          time!.millisecondsSinceEpoch,
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE,
+        ),
+        '2020-10-01 10:00',
+      );
+
+      // 纯日期
+      time = parseTime('2020-10-01', DATE_YEAR_MONTH_DATE);
+      expect(
+        formatDateTime(
+          time!.millisecondsSinceEpoch,
+          format: DATE_YEAR_MONTH_DATE,
+        ),
+        '2020-10-01',
+      );
+
+      time = parseTime(
+        '2020.10.01 10:00:00',
+        DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND_DOT,
+      );
+      expect(
+        formatDateTime(
+          time!.millisecondsSinceEpoch,
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2020-10-01 10:00:00',
+      );
+
+      // 日期时间（不带秒）
+      time = parseTime(
+        '2020.10.01 10:00',
+        DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_DOT,
+      );
+      expect(
+        formatDateTime(
+          time!.millisecondsSinceEpoch,
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE,
+        ),
+        '2020-10-01 10:00',
+      );
+
+      // 纯日期
+      time = parseTime('2020.10.01', DATE_YEAR_MONTH_DATE_DOT);
+      expect(
+        formatDateTime(
+          time!.millisecondsSinceEpoch,
+          format: DATE_YEAR_MONTH_DATE,
+        ),
+        '2020-10-01',
+      );
+
+      time = parseTime(
+        '2020/10/01 10:00:00',
+        DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND_SLASH,
+      );
+      expect(
+        formatDateTime(
+          time!.millisecondsSinceEpoch,
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2020-10-01 10:00:00',
+      );
+
+      // 日期时间（不带秒）
+      time = parseTime(
+        '2020/10/01 10:00',
+        DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SLASH,
+      );
+      expect(
+        formatDateTime(
+          time!.millisecondsSinceEpoch,
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE,
+        ),
+        '2020-10-01 10:00',
+      );
+
+      // 纯日期
+      time = parseTime('2020/10/01', DATE_YEAR_MONTH_DATE_SLASH);
+      expect(
+        formatDateTime(
+          time!.millisecondsSinceEpoch,
+          format: DATE_YEAR_MONTH_DATE,
+        ),
+        '2020-10-01',
+      );
+    });
     test('hour', () {
       var ts = DateTime.parse('2020-10-10 10:01:01').millisecondsSinceEpoch;
 

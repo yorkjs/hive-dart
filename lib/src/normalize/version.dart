@@ -1,8 +1,8 @@
 import '../util/string.dart';
 
 /// 标准化版本号，方便后续进行比较
-String normalizeVersion(String version) {
-  final tokens = version.split('.');
+String normalizeVersion(String value) {
+  final tokens = value.split('.');
   switch (tokens.length) {
     case 1:
       return padStringStart(tokens[0], 12);

@@ -1,6 +1,6 @@
 import '../util/string.dart';
 
-String formatHourMinutes(int value) {
+String _formatHourMinutes(int value) {
   final hours = value ~/ 60;
   final minutes = value % 60;
 
@@ -8,16 +8,16 @@ String formatHourMinutes(int value) {
 }
 
 // 营业时间时段范围为 [0, 2880] 可跨天, 0-1440 为当天，1440-2880 为次日
-String formatBusinessTimes(List<int> businessTimes) {
-  final len = businessTimes.length;
+String formatBusinessTimes(List<int> value) {
+  final len = value.length;
   if (len == 0 || len % 2 != 0) {
     return '';
   }
 
   final timeRanges = <String>[];
   for (var i = 0; i < len; i += 2) {
-    final start = businessTimes[i];
-    final end = businessTimes[i + 1];
+    final start = value[i];
+    final end = value[i + 1];
     final startTime = start % 1440;
     final endTime = end % 1440;
 
@@ -27,12 +27,12 @@ String formatBusinessTimes(List<int> businessTimes) {
       continue;
     }
 
-    var startTimeStr = formatHourMinutes(startTime);
+    var startTimeStr = _formatHourMinutes(startTime);
     if (start > 1440) {
       startTimeStr = '次日$startTimeStr';
     }
 
-    var endTimeStr = formatHourMinutes(endTime);
+    var endTimeStr = _formatHourMinutes(endTime);
     if (end > 1440) {
       endTimeStr = '次日$endTimeStr';
     }

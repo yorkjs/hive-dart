@@ -96,3 +96,8 @@
 - 新增 normalizeUrl, toProtocolRelativeUrl, encodeUriComponent, decodeUriComponent
 - 新增 darkenColor, lightenColor, hasSpecialCharacters, removeSpecialCharacters
 - 新增 parseInteger、parseNumber、applyRate
+
+## 0.2.3
+
+- 新增 isCorporateAccountNumber, isMobile, hasDecimal, parseTime
+- 删除 isInteger, stringToTime, formatProvince, formatCity, formatDistrict, formatHourMinutes

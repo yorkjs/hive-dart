@@ -14,7 +14,7 @@ class IDuration {
   });
 }
 
-IDuration normalizeDuration(int milliseconds) {
+IDuration normalizeDuration(int value) {
   final result = IDuration(
     days: 0,
     hours: 0,
@@ -22,14 +22,14 @@ IDuration normalizeDuration(int milliseconds) {
     seconds: 0,
   );
 
-  if (milliseconds <= 0) {
+  if (value <= 0) {
     return result;
   }
 
-  final seconds = (milliseconds / MS_SECOND).ceil();
-  final minutes = (milliseconds / MS_MINUTE).floor();
-  final hours = (milliseconds / MS_HOUR).floor();
-  final days = (milliseconds / MS_DAY).floor();
+  final seconds = (value / MS_SECOND).ceil();
+  final minutes = (value / MS_MINUTE).floor();
+  final hours = (value / MS_HOUR).floor();
+  final days = (value / MS_DAY).floor();
 
   if (days > 0) {
     result.days = days;
@@ -43,6 +43,6 @@ IDuration normalizeDuration(int milliseconds) {
   if (seconds % 60 > 0) {
     result.seconds = seconds % 60;
   }
-  
+
   return result;
 }

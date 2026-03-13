@@ -69,17 +69,6 @@ void main() {
     test('convertRate', () {
       expect(rateToDisplay(1015), 10.15);
       expect(rateToBackend(10.15), 1015);
-      expect(calculateRate(10, 100), 1000);
-      expect(calculateRate(5, 1), 50000);
-      expect(calculateRate(5, 5), 10000);
-      expect(calculateRate(5, 10), 5000);
-      expect(calculateRate(5, 100), 500);
-      expect(calculateRate(5, 1000), 50);
-      expect(calculateRate(5, 10000), 5);
-      expect(applyRate(1000, 0), 0);
-      expect(applyRate(1000, 1000), 100);
-      expect(applyRate(1000, 10000), 1000);
-      expect(applyRate(1000, 245), 24);
     });
 
     test('convertWeight', () {
@@ -125,111 +114,6 @@ void main() {
       // 测试无效日期
       expect(timeToTimestamp(DateTime.fromMillisecondsSinceEpoch(0)), 0);
       expect(timeToTimestamp(timestampToTime(0)), 0);
-
-      var time = stringToTime(
-        '2020-10-01 10:00:00',
-        DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
-      );
-      expect(
-        formatDateTime(
-          time!.millisecondsSinceEpoch,
-          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
-        ),
-        '2020-10-01 10:00:00',
-      );
-
-      // 日期时间（不带秒）
-      time = stringToTime(
-        '2020-10-01 10:00',
-        DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE,
-      );
-      expect(
-        formatDateTime(
-          time!.millisecondsSinceEpoch,
-          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE,
-        ),
-        '2020-10-01 10:00',
-      );
-
-      // 纯日期
-      time = stringToTime('2020-10-01', DATE_YEAR_MONTH_DATE);
-      expect(
-        formatDateTime(
-          time!.millisecondsSinceEpoch,
-          format: DATE_YEAR_MONTH_DATE,
-        ),
-        '2020-10-01',
-      );
-
-      time = stringToTime(
-        '2020.10.01 10:00:00',
-        DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND_DOT,
-      );
-      expect(
-        formatDateTime(
-          time!.millisecondsSinceEpoch,
-          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
-        ),
-        '2020-10-01 10:00:00',
-      );
-
-      // 日期时间（不带秒）
-      time = stringToTime(
-        '2020.10.01 10:00',
-        DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_DOT,
-      );
-      expect(
-        formatDateTime(
-          time!.millisecondsSinceEpoch,
-          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE,
-        ),
-        '2020-10-01 10:00',
-      );
-
-      // 纯日期
-      time = stringToTime('2020.10.01', DATE_YEAR_MONTH_DATE_DOT);
-      expect(
-        formatDateTime(
-          time!.millisecondsSinceEpoch,
-          format: DATE_YEAR_MONTH_DATE,
-        ),
-        '2020-10-01',
-      );
-
-      time = stringToTime(
-        '2020/10/01 10:00:00',
-        DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND_SLASH,
-      );
-      expect(
-        formatDateTime(
-          time!.millisecondsSinceEpoch,
-          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
-        ),
-        '2020-10-01 10:00:00',
-      );
-
-      // 日期时间（不带秒）
-      time = stringToTime(
-        '2020/10/01 10:00',
-        DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SLASH,
-      );
-      expect(
-        formatDateTime(
-          time!.millisecondsSinceEpoch,
-          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE,
-        ),
-        '2020-10-01 10:00',
-      );
-
-      // 纯日期
-      time = stringToTime('2020/10/01', DATE_YEAR_MONTH_DATE_SLASH);
-      expect(
-        formatDateTime(
-          time!.millisecondsSinceEpoch,
-          format: DATE_YEAR_MONTH_DATE,
-        ),
-        '2020-10-01',
-      );
     });
   });
 }

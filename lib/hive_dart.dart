@@ -43,9 +43,10 @@ export 'src/format/week.dart';
 
 export 'src/is/bank_card_number.dart';
 export 'src/is/barcode.dart';
+export 'src/is/corporate_account_number.dart';
 export 'src/is/email.dart';
 export 'src/is/identity_card_number.dart';
-export 'src/is/number.dart';
+export 'src/is/mobile.dart';
 export 'src/is/price.dart';
 export 'src/is/url.dart';
 export 'src/is/verify_code.dart';
@@ -62,6 +63,7 @@ export 'src/parse/phone_number.dart';
 
 export 'src/util/number.dart';
 export 'src/util/random.dart';
+export 'src/util/rate.dart';
 export 'src/util/string.dart';
 export 'src/util/time.dart';
 export 'src/util/url.dart';

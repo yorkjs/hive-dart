@@ -1,4 +1,17 @@
 import 'package:hive_dart/hive_dart.dart';
+import 'package:intl/intl.dart';
+
+
+/// 时间戳转成时间对象
+DateTime? parseTime(String str, String format) {
+  try {
+    final formatter = DateFormat(format);
+    return formatter.parse(str);
+  } catch (e) {
+    return null;
+  }
+}
+
 
 /// 获取某个小时开始时间
 int startOfHour(int timestamp) {

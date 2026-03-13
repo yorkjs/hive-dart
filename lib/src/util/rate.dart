@@ -1,0 +1,22 @@
+import './number.dart';
+
+/// 计算万分比，即 value1 / value2 得到一个万分比
+///
+/// [value1] 除数
+/// [value2] 被除数
+/// 返回万分比比例
+int calculateRate(num value1, num value2) {
+  if (value2 == 0) {
+    return 0;
+  }
+  return divideNumber(timesNumber(value1, 10000), value2).toInt();
+}
+
+/// 根据万分比比例计算数值
+///
+/// [value] 原始数值
+/// [rate] 万分比比例
+/// 返回计算后的数值，仅返回整数部分
+int applyRate(num value, num rate) {
+  return divideNumber(timesNumber(value, rate), 10000).toInt();
+}

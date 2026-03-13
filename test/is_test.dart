@@ -15,18 +15,35 @@ void main() {
       expect(isCustomBarcode('C692418781212'), true);
     });
 
-    test('isStandardBarcode', () {
-      expect(isInteger(1), true);
-      expect(isInteger(1.0), true);
-      expect(isInteger(1.1), false);
-    });
-
     test('isBankCardNumber', () {
       expect(isBankCardNumber(''), false);
       expect(isBankCardNumber('1'), false);
       expect(isBankCardNumber('12'), false);
       expect(isBankCardNumber('6228480012345678'), false);
       expect(isBankCardNumber('1234567890123'), false);
+    });
+
+    test('isCorporateAccountNumber', () {
+
+      expect(isCorporateAccountNumber(''), false);
+      expect(isCorporateAccountNumber('1'), false);
+      expect(isCorporateAccountNumber('12'), false);
+      expect(isCorporateAccountNumber('6228480012123123123123123345678'), false);
+      expect(isCorporateAccountNumber('1234567890123'), true);
+      expect(isCorporateAccountNumber('asdasdasdasd'), false);
+
+    });
+
+    test('isMobile', () {
+
+      expect(isMobile('13512345678'), true);
+      expect(isMobile('1351234567'), false);
+      expect(isMobile('135123456789'), false);
+      expect(isMobile(' 13512345678'), false);
+      expect(isMobile('13512345678 '), false);
+      expect(isMobile(' 13512345678 '), false);
+      expect(isMobile(''), false);
+
     });
 
     test('isIdentityCardNumber', () {

@@ -1,5 +1,4 @@
 import 'package:decimal/decimal.dart';
-import 'package:hive_dart/src/is/number.dart';
 
 /// 将 `num`（int/double）转换为 `Decimal`，避免精度问题
 Decimal _numToDecimal(num n) {
@@ -60,15 +59,15 @@ String truncateNumber(num value, {int decimals = 0}) {
 String shortNumber(num value, String Function(num) formatUnshort) {
   if (value >= 1000000000000) {
     final trillion = divideNumber(value, 1000000000000);
-    return '${truncateNumber(trillion, decimals: isInteger(trillion) ? 0 : 1)}万亿';
+    return '${truncateNumber(trillion, decimals: hasDecimal(trillion) ? 1 : 0)}万亿';
   }
   if (value >= 100000000) {
     final billion = divideNumber(value, 100000000);
-    return '${truncateNumber(billion, decimals: isInteger(billion) ? 0 : 1)}亿';
+    return '${truncateNumber(billion, decimals: hasDecimal(billion) ? 1 : 0)}亿';
   }
   if (value >= 10000) {
     final tenThousand = divideNumber(value, 10000);
-    return '${truncateNumber(tenThousand, decimals: isInteger(tenThousand) ? 0 : 1)}万';
+    return '${truncateNumber(tenThousand, decimals: hasDecimal(tenThousand) ? 1 : 0)}万';
   }
   return formatUnshort(value);
 }
@@ -190,4 +189,13 @@ double? parseNumber(String value) {
   } catch (e) {
     return null;
   }
+}
+
+/// 数字是否包含小数部分
+bool hasDecimal(num value) {
+  // 先排除无效数字，它们既不是整数也没有小数
+  if (!value.isFinite) {
+    return false;
+  }
+  return value % 1 != 0;
 }

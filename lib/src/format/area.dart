@@ -131,12 +131,12 @@ String formatArea(IArea area, {bool simplify = true}) {
 
   if (province != null) {
     appendItem(
-      isSimplify ? formatProvince(province.name) : province.name
+      isSimplify ? _formatProvince(province.name) : province.name
     );
   }
 
   if (city != null) {
-    final item = isSimplify ? formatCity(city.name) : city.name;
+    final item = isSimplify ? _formatCity(city.name) : city.name;
     if (item.isNotEmpty
       && item != '市辖区'
       && item != '县'
@@ -148,7 +148,7 @@ String formatArea(IArea area, {bool simplify = true}) {
   }
 
   if (district != null) {
-    final item = isSimplify ? formatDistrict(district.name) : district.name;
+    final item = isSimplify ? _formatDistrict(district.name) : district.name;
     if (item.isNotEmpty) {
       appendItem(item);
     }
@@ -165,7 +165,7 @@ String formatArea(IArea area, {bool simplify = true}) {
   return list.join(separator);
 }
 
-String formatProvince(String name) {
+String _formatProvince(String name) {
   if (provinceMap.containsKey(name)) {
     return provinceMap[name]!;
   }
@@ -187,7 +187,7 @@ String formatProvince(String name) {
   return name;
 }
 
-String formatCity(String name) {
+String _formatCity(String name) {
   // 有时候会把港澳台放到城市这级显示
   if (name.startsWith('中国')) {
     name = name.substring(2);
@@ -209,7 +209,7 @@ String formatCity(String name) {
   return name;
 }
 
-String formatDistrict(String name) {
+String _formatDistrict(String name) {
   if (name == '市辖区') {
     return '';
   }

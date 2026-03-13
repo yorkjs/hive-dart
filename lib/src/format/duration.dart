@@ -1,10 +1,10 @@
 import '../normalize/duration.dart';
 
-String formatDuration(int milliseconds) {
-  
+String formatDuration(int value) {
+
   final List<String> result = [];
-  final data = normalizeDuration(milliseconds);
-  
+  final data = normalizeDuration(value);
+
   if (data.days > 0) {
     result.add('${data.days}天');
   }

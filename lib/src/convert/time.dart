@@ -1,5 +1,3 @@
-import 'package:intl/intl.dart';
-
 class ITimeField {
   int year;
   int month;
@@ -52,14 +50,4 @@ int timeToTimestamp(DateTime t) {
 /// 时间戳转成时间对象
 DateTime timestampToTime(int timestamp) {
   return DateTime.fromMillisecondsSinceEpoch(timestamp);
-}
-
-/// 时间戳转成时间对象
-DateTime? stringToTime(String str, String format) {
-  try {
-    final formatter = DateFormat(format);
-    return formatter.parse(str);
-  } catch (e) {
-    return null;
-  }
 }

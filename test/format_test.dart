@@ -61,7 +61,6 @@ void main() {
         country: INode(id: 0, name: '中国台湾'),
       )), '中国台湾');
 
-      expect(formatCity("中国台湾"), "台湾");
     });
 
     test('formatCategory', () {
