@@ -1,5 +1,4 @@
-import 'package:hive_dart/src/util/number.dart';
-
+import '../util/internal.dart';
 import '../format/number.dart';
 
 String formatCount(int value, {String unit = ''}) {

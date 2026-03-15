@@ -4,6 +4,49 @@ import 'package:hive_dart/hive_dart.dart';
 import 'package:test/test.dart';
 
 void main() {
+  group('color', () {
+    test('hexToRgbaString', () {
+      expect(hexToRgbaString("#F00", 0.5), "rgba(255,0,0,0.5)");
+      expect(hexToRgbaString("#FF0000", 0.5), "rgba(255,0,0,0.5)");
+      expect(hexToRgbaString("#f00", 0.5), "rgba(255,0,0,0.5)");
+      expect(hexToRgbaString("#ff0000", 0.5), "rgba(255,0,0,0.5)");
+
+      expect(hexToRgbaString("#0F0", 0.7), "rgba(0,255,0,0.7)");
+      expect(hexToRgbaString("#00FF00", 0.7), "rgba(0,255,0,0.7)");
+      expect(hexToRgbaString("#00F", 0.9), "rgba(0,0,255,0.9)");
+      expect(hexToRgbaString("#0000FF", 0.9), "rgba(0,0,255,0.9)");
+
+      expect(darkenColor("#ff0000", 0.2), "#990000");
+      expect(lightenColor("#ff0000", 0.2), "#FF6666");
+      expect(lightenColor("#ff000000", 0.2), "#FF666600");
+      expect(lightenColor("#ff0000FF", 0.2), "#FF6666");
+    });
+  });
+
+  group('distance', () {
+    test('calculateDistance', () {
+      expect(distanceToDisplay(8000), 8);
+      expect(distanceToDisplay(8800), 8.8);
+      expect(distanceToDisplay(8880), 8.88);
+      expect(distanceToDisplay(8888), 8.888);
+
+      expect(distanceToBackend(8), 8000);
+      expect(distanceToBackend(8.8), 8800);
+      expect(distanceToBackend(8.88), 8880);
+      expect(distanceToBackend(8.888), 8888);
+
+      expect(
+        calculateDistance(
+          116.4074, // 北京经度
+          39.9042, // 北京纬度
+          121.4737, // 上海经度
+          31.2304, // 上海纬度
+        ),
+        1067310,
+      );
+    });
+  });
+
   group('number', () {
     test('plusNumber', () {
       expect(plusNumber(1, 2), 3);
@@ -171,11 +214,24 @@ void main() {
       expect(calculateRate(5, 1000), 50);
       expect(calculateRate(5, 10000), 5);
     });
-    test('applyRate', () {
-      expect(applyRate(1000, 0), 0);
-      expect(applyRate(1000, 1000), 100);
-      expect(applyRate(1000, 10000), 1000);
-      expect(applyRate(1000, 245), 24);
+    test('applyRateFloor', () {
+      expect(applyRateFloor(1000, 0), 0);
+      expect(applyRateFloor(1000, 1000), 100);
+      expect(applyRateFloor(1000, 10000), 1000);
+      expect(applyRateFloor(1000, 245), 24);
+    });
+    test('applyRateCeil', () {
+      expect(applyRateCeil(1000, 0), 0);
+      expect(applyRateCeil(1000, 1000), 100);
+      expect(applyRateCeil(1000, 10000), 1000);
+      expect(applyRateCeil(1000, 245), 25);
+    });
+    test('applyRateRound', () {
+      expect(applyRateRound(1000, 0), 0);
+      expect(applyRateRound(1000, 1000), 100);
+      expect(applyRateRound(1000, 10000), 1000);
+      expect(applyRateRound(1000, 245), 25);
+      expect(applyRateRound(1000, 244), 24);
     });
   });
 
@@ -271,22 +327,22 @@ void main() {
       expect(padStringStart('12', 3), '012');
       expect(padStringStart('123', 3), '123');
     });
-    test('hasSpecialCharacters', () {
-      expect(hasSpecialCharacters('abc,[1]23. 你好，【世界】！'), false);
-      expect(hasSpecialCharacters('abc,123. \t\n'), true);
-      expect(hasSpecialCharacters('abc,123.☺️'), true);
-      expect(hasSpecialCharacters(' abc,  123. '), false);
+    test('hasSpecialCharacter', () {
+      expect(hasSpecialCharacter('abc,[1]23. 你好，【世界】！'), false);
+      expect(hasSpecialCharacter('abc,123. \t\n'), true);
+      expect(hasSpecialCharacter('abc,123.☺️'), true);
+      expect(hasSpecialCharacter(' abc,  123. '), false);
     });
 
-    test('removeSpecialCharacters', () {
+    test('removeSpecialCharacter', () {
       expect(
-        removeSpecialCharacters('abc,[1]23. 你好，【世界】！'),
+        removeSpecialCharacter('abc,[1]23. 你好，【世界】！'),
         'abc,[1]23. 你好，【世界】！',
       );
-      expect(removeSpecialCharacters('abc,123.\t\n'), 'abc,123.');
-      expect(removeSpecialCharacters('a☺️bc,☺️123.^456☺️%'), 'abc,123.456%');
-      expect(removeSpecialCharacters('a☺️bc，123。☺️'), 'abc，123。');
-      expect(removeSpecialCharacters(' abc,  123. '), ' abc,  123. ');
+      expect(removeSpecialCharacter('abc,123.\t\n'), 'abc,123.');
+      expect(removeSpecialCharacter('a☺️bc,☺️123.^456☺️%'), 'abc,123.456%');
+      expect(removeSpecialCharacter('a☺️bc，123。☺️'), 'abc，123。');
+      expect(removeSpecialCharacter(' abc,  123. '), ' abc,  123. ');
     });
   });
 
@@ -1116,18 +1172,18 @@ void main() {
         "key=123 啊啊+-*/_.!~()'",
       );
     });
-    test('normalizeUrl', () {
-      expect(normalizeUrl('http://example.com'), 'http://example.com');
-      expect(normalizeUrl('https://example.com'), 'https://example.com');
-      expect(normalizeUrl('//example.com'), 'https://example.com');
-      expect(normalizeUrl('example.com'), 'https://example.com');
+    test('toHttpProtocolUrl', () {
+      expect(toHttpProtocolUrl('http://example.com'), 'http://example.com');
+      expect(toHttpProtocolUrl('https://example.com'), 'https://example.com');
+      expect(toHttpProtocolUrl('//example.com'), 'https://example.com');
+      expect(toHttpProtocolUrl('example.com'), 'https://example.com');
     });
 
-    test('toProtocolRelativeUrl', () {
-      expect(toProtocolRelativeUrl('http://example.com'), '//example.com');
-      expect(toProtocolRelativeUrl('https://example.com'), '//example.com');
-      expect(toProtocolRelativeUrl('//example.com'), '//example.com');
-      expect(toProtocolRelativeUrl('example.com'), '//example.com');
+    test('toRelativeProtocolUrl', () {
+      expect(toRelativeProtocolUrl('http://example.com'), '//example.com');
+      expect(toRelativeProtocolUrl('https://example.com'), '//example.com');
+      expect(toRelativeProtocolUrl('//example.com'), '//example.com');
+      expect(toRelativeProtocolUrl('example.com'), '//example.com');
     });
   });
 }

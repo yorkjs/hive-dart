@@ -1,4 +1,4 @@
-import 'package:hive_dart/src/constant/shelf_life.dart';
+import '../constant/shelf_life.dart';
 
 class IShelfLife {
   int years;

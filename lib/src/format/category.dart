@@ -1,5 +1,5 @@
-import 'package:hive_dart/src/type.dart';
 import 'package:json_annotation/json_annotation.dart';
+import '../type.dart';
 part 'category.g.dart';
 
 @JsonSerializable()

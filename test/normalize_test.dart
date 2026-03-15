@@ -1,7 +1,4 @@
-import 'package:hive_dart/src/constant/millisecond.dart';
-import 'package:hive_dart/src/normalize/duration.dart';
-import 'package:hive_dart/src/normalize/shelf_life.dart';
-import 'package:hive_dart/src/normalize/version.dart';
+import 'package:hive_dart/hive_dart.dart';
 import 'package:test/test.dart';
 
 void main() {

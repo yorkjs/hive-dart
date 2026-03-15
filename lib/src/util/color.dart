@@ -43,14 +43,14 @@ IRgba hexToRgbaObject(String color) {
   }
 
   final result = IRgba(
-    red: int.parse(hex.substring(0, 2), radix: 16),
-    green: int.parse(hex.substring(2, 4), radix: 16),
-    blue: int.parse(hex.substring(4, 6), radix: 16),
+    red: parseInteger(hex.substring(0, 2), 16)!,
+    green: parseInteger(hex.substring(2, 4), 16)!,
+    blue: parseInteger(hex.substring(4, 6), 16)!,
     alpha: 1.0,
   );
 
   if (hex.length == 8) {
-    result.alpha = int.parse(hex.substring(6, 8), radix: 16) / 255;
+    result.alpha = parseInteger(hex.substring(6, 8), 16)! / 255;
   }
 
   return result;
@@ -188,5 +188,5 @@ double _hue2rgb(double p, double q, double t) {
 }
 
 String _toHex(int color) {
-  return padStringStart(color.toRadixString(16), 2);
+  return padStringStart(color.toRadixString(16).toUpperCase(), 2);
 }

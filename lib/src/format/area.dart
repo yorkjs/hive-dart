@@ -1,5 +1,5 @@
-import 'package:hive_dart/src/type.dart';
 import 'package:json_annotation/json_annotation.dart';
+import '../type.dart';
 part 'area.g.dart';
 
 final Map<String, String> provinceMap = {

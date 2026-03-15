@@ -79,7 +79,7 @@ String padStringStart(String str, int length) {
 ///
 /// [str] 目标字符串
 /// 返回是否包含特殊字符
-bool hasSpecialCharacters(String str) {
+bool hasSpecialCharacter(String str) {
   if (str.isEmpty) {
     return false;
   }
@@ -93,7 +93,7 @@ bool hasSpecialCharacters(String str) {
 ///
 /// [str] 目标字符串
 /// 返回清理后的字符串
-String removeSpecialCharacters(String str) {
+String removeSpecialCharacter(String str) {
   if (str.isEmpty) {
     return '';
   }

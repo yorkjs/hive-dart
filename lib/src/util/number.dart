@@ -55,23 +55,6 @@ String truncateNumber(num value, {int decimals = 0}) {
   return '$integerPart.$truncatedDecimal';
 }
 
-/// 以较短的方式返回数字
-String shortNumber(num value, String Function(num) formatUnshort) {
-  if (value >= 1000000000000) {
-    final trillion = divideNumber(value, 1000000000000);
-    return '${truncateNumber(trillion, decimals: hasDecimal(trillion) ? 1 : 0)}万亿';
-  }
-  if (value >= 100000000) {
-    final billion = divideNumber(value, 100000000);
-    return '${truncateNumber(billion, decimals: hasDecimal(billion) ? 1 : 0)}亿';
-  }
-  if (value >= 10000) {
-    final tenThousand = divideNumber(value, 10000);
-    return '${truncateNumber(tenThousand, decimals: hasDecimal(tenThousand) ? 1 : 0)}万';
-  }
-  return formatUnshort(value);
-}
-
 // 解析字符串中的整数
 int? parseInteger(String value, [int? radix]) {
   /// 步骤1：去除首尾空格（和JS行为一致）

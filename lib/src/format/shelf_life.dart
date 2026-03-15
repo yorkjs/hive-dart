@@ -1,4 +1,4 @@
-import 'package:hive_dart/src/normalize/shelf_life.dart';
+import '../normalize/shelf_life.dart';
 
 String formatShelfLife(int value) {
 

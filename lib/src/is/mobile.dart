@@ -1,6 +1,6 @@
 
-import 'package:hive_dart/src/constant/phone_number.dart';
-import 'package:hive_dart/src/parse/phone_number.dart';
+import '../constant/phone_number.dart';
+import '../parse/phone_number.dart';
 
 /// 是否为手机号码
 ///

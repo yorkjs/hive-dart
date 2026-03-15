@@ -13,7 +13,6 @@ export 'src/constant/phone_number.dart';
 export 'src/constant/shelf_life.dart';
 export 'src/constant/size.dart';
 
-export 'src/convert/color.dart';
 export 'src/convert/discount.dart';
 export 'src/convert/distance.dart';
 export 'src/convert/money.dart';
@@ -56,11 +55,14 @@ export 'src/mask/mobile.dart';
 export 'src/mask/name.dart';
 
 export 'src/normalize/duration.dart';
+export 'src/normalize/shelf_life.dart';
 export 'src/normalize/version.dart';
 
 export 'src/parse/auth_code.dart';
 export 'src/parse/phone_number.dart';
 
+export 'src/util/color.dart';
+export 'src/util/distance.dart';
 export 'src/util/number.dart';
 export 'src/util/random.dart';
 export 'src/util/rate.dart';

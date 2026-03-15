@@ -17,7 +17,7 @@ String decodeUriComponent(String str) {
 final _httpProtocolPattern = RegExp(r'^https?://', caseSensitive: false);
 
 /// 标准化 URL：确保包含协议部分
-String normalizeUrl(String url) {
+String toHttpProtocolUrl(String url) {
   if (url.isEmpty) {
     return '';
   }
@@ -34,7 +34,7 @@ String normalizeUrl(String url) {
 }
 
 /// 将 URL 转换为协议相对路径（以 // 开头）
-String toProtocolRelativeUrl(String url) {
+String toRelativeProtocolUrl(String url) {
   if (url.isEmpty) {
     return '';
   }

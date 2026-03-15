@@ -1,7 +1,8 @@
-import 'package:hive_dart/src/constant/money.dart';
-import 'package:hive_dart/src/convert/money.dart';
-import 'package:hive_dart/src/format/number.dart';
-import 'package:hive_dart/src/util/number.dart';
+import '../constant/money.dart';
+import '../convert/money.dart';
+import '../format/number.dart';
+import '../util/internal.dart';
+import '../util/number.dart';
 
 String formatAmount(int value, {String unit = '元'}) {
   return formatNumberWithComma(moneyToDisplay(value), decimals: 2) + unit;
