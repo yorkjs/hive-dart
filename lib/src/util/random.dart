@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import '../constant/random_charset.dart';
 import '../convert/time.dart';
 import './string.dart';
 
@@ -41,18 +42,18 @@ int randomIntegerByRange(int min, int max) {
 /// 生成指定长度的随机字符串
 ///
 /// [length] 随机字符串长度
-/// [chars] 随机字符集，默认为大小写字母和数字
+/// [charset] 随机字符集，默认为大小写字母和数字
 String randomStringByLength(
   int length, {
-  String chars =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
+  String charset =
+      RANDOM_CHARSET_ALPHA_NUMERIC,
 }) {
   final random = Random.secure();
   final result = List<String>.filled(length, '');
-  final charLength = chars.length;
+  final charLength = charset.length;
 
   for (int i = 0; i < length; i++) {
-    result[i] = chars[random.nextInt(charLength)];
+    result[i] = charset[random.nextInt(charLength)];
   }
   return result.join('');
 }

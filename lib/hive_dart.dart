@@ -10,6 +10,7 @@ export 'src/constant/date_time.dart';
 export 'src/constant/millisecond.dart';
 export 'src/constant/money.dart';
 export 'src/constant/phone_number.dart';
+export 'src/constant/random_charset.dart';
 export 'src/constant/shelf_life.dart';
 export 'src/constant/size.dart';
 
