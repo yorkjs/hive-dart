@@ -332,6 +332,9 @@ void main() {
       expect(hasSpecialCharacter('abc,123. \t\n'), true);
       expect(hasSpecialCharacter('abc,123.☺️'), true);
       expect(hasSpecialCharacter(' abc,  123. '), false);
+      expect(hasSpecialCharacter('a+b'), false);
+      expect(hasSpecialCharacter('a-b'), false);
+      expect(hasSpecialCharacter('a/b'), false);
     });
 
     test('removeSpecialCharacter', () {

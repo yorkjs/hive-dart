@@ -84,7 +84,7 @@ bool hasSpecialCharacter(String str) {
     return false;
   }
   final pattern = RegExp(
-    r'''[^ \u4e00-\u9fa5a-zA-Z0-9，。、；：！“”‘’（）【】《》？～·—…\.,;:!?"'()\[\]{}<>@#&%￥$_\-]''',
+    r'''[^ \u4e00-\u9fa5a-zA-Z0-9，。、；：！“”‘’（）【】《》？～·—…\.,;:!?"'()\[\]{}<>@#&%￥$_\+/-]''',
   );
   return pattern.hasMatch(str);
 }
@@ -98,7 +98,7 @@ String removeSpecialCharacter(String str) {
     return '';
   }
   final pattern = RegExp(
-    r'''[^ \u4e00-\u9fa5a-zA-Z0-9，。、；：！“”‘’（）【】《》？～·—…\.,;:!?"'()\[\]{}<>@#&%￥$_\-]''',
+    r'''[^ \u4e00-\u9fa5a-zA-Z0-9，。、；：！“”‘’（）【】《》？～·—…\.,;:!?"'()\[\]{}<>@#&%￥$_\+/-]''',
   );
   return str.replaceAll(pattern, '');
 }
