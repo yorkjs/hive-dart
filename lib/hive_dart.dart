@@ -46,6 +46,7 @@ export 'src/is/barcode.dart';
 export 'src/is/corporate_account_number.dart';
 export 'src/is/email.dart';
 export 'src/is/identity_card_number.dart';
+export 'src/is/location_in_china.dart';
 export 'src/is/mobile.dart';
 export 'src/is/price.dart';
 export 'src/is/url.dart';

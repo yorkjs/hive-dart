@@ -45,8 +45,7 @@ int randomIntegerByRange(int min, int max) {
 /// [charset] 随机字符集，默认为大小写字母和数字
 String randomStringByLength(
   int length, {
-  String charset =
-      RANDOM_CHARSET_ALPHA_NUMERIC,
+  String charset = RANDOM_CHARSET_ALPHA_NUMERIC,
 }) {
   final random = Random.secure();
   final result = List<String>.filled(length, '');

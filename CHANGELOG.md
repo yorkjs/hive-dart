@@ -101,3 +101,7 @@
 
 - 新增 isCorporateAccountNumber, isMobile, hasDecimal, parseTime, hasSpecialCharacter, removeSpecialCharacter, applyRateFloor, applyRateCeil, applyRateRound, toHttpProtocolUrl, toRelativeProtocolUrl
 - 删除 isInteger, stringToTime, formatProvince, formatCity, formatDistrict, formatHourMinutes, hasSpecialCharacters, removeSpecialCharacters, applyRate, normalizeUrl, toProtocolRelativeUrl
+
+## 0.2.4
+
+- 新增 isLocationInChina

@@ -34,6 +34,17 @@ void main() {
 
     });
 
+    test('isLocationInChina', () {
+
+      expect(isLocationInChina(116.4074, 39.9042), true);
+      expect(isLocationInChina(121.4874, 31.2242), true);
+      expect(isLocationInChina(160.4874, 31.2242), false);
+      expect(isLocationInChina(121.4874, 80), false);
+      expect(isLocationInChina(0, 0), false);
+      expect(isLocationInChina(-120, -30), false);
+
+    });
+
     test('isMobile', () {
 
       expect(isMobile('13512345678'), true);
