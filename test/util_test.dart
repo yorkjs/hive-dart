@@ -335,6 +335,7 @@ void main() {
       expect(hasSpecialCharacter('a+b'), false);
       expect(hasSpecialCharacter('a-b'), false);
       expect(hasSpecialCharacter('a/b'), false);
+      expect(hasSpecialCharacter('a*b'), false);
     });
 
     test('removeSpecialCharacter', () {
@@ -346,6 +347,7 @@ void main() {
       expect(removeSpecialCharacter('a☺️bc,☺️123.^456☺️%'), 'abc,123.456%');
       expect(removeSpecialCharacter('a☺️bc，123。☺️'), 'abc，123。');
       expect(removeSpecialCharacter(' abc,  123. '), ' abc,  123. ');
+      expect(removeSpecialCharacter(' +-*/ '), ' +-*/ ');
     });
   });
 
