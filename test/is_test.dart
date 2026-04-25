@@ -15,6 +15,21 @@ void main() {
       expect(isCustomBarcode('C692418781212'), true);
     });
 
+    test('isHexColor', () {
+      expect(isHexColor('#666'), true);
+      expect(isHexColor('#616161'), true);
+      expect(isHexColor('#6'), false);
+      expect(isHexColor('#66'), false);
+      expect(isHexColor('#6666'), true); // rgba
+      expect(isHexColor('#66666'), false);
+      expect(isHexColor('#6666666'), false);
+      expect(isHexColor('#66666666'), true); // rgba
+      expect(isHexColor('#666666666'), false);
+
+      expect(isHexColor('666'), false);
+      expect(isHexColor('666666'), false);
+    });
+
     test('isBankCardNumber', () {
       expect(isBankCardNumber(''), false);
       expect(isBankCardNumber('1'), false);

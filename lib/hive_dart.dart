@@ -43,6 +43,7 @@ export 'src/format/week.dart';
 
 export 'src/is/bank_card_number.dart';
 export 'src/is/barcode.dart';
+export 'src/is/color.dart';
 export 'src/is/corporate_account_number.dart';
 export 'src/is/email.dart';
 export 'src/is/identity_card_number.dart';
