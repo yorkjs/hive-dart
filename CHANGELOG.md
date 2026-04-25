@@ -104,4 +104,6 @@
 
 ## 0.2.4
 
-- 新增 isLocationInChina
+- 新增 isLocationInChina, isHexColor
+- 新增 startOfYear, startOfPrevYear, startOfNextYear, endOfYear
+- 新增 sameOfPrevDay, sameOfPrevWeek, sameOfPrevMonth, sameOfPrevYear

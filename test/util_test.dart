@@ -868,6 +868,204 @@ void main() {
       );
     });
 
+
+    test('year', () {
+      var ts = DateTime.parse('2025-02-10 10:01:01').millisecondsSinceEpoch;
+
+      expect(
+        formatDateTime(
+          startOfYear(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2025-01-01 00:00:00',
+      );
+      expect(
+        formatDateTime(
+          startOfPrevYear(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2024-01-01 00:00:00',
+      );
+      expect(
+        formatDateTime(
+          startOfNextYear(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2026-01-01 00:00:00',
+      );
+      expect(
+        formatDateTime(
+          endOfYear(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2025-12-31 23:59:59',
+      );
+
+    });
+
+    test('time_same', () {
+      // 测试用例 1: 正常日期
+      var ts = DateTime.parse('2025-10-10 10:01:01').millisecondsSinceEpoch;
+
+      expect(
+        formatDateTime(
+          sameOfPrevDay(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2025-10-09 10:01:01',
+      );
+      expect(
+        formatDateTime(
+          sameOfPrevWeek(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2025-10-03 10:01:01',
+      );
+      expect(
+        formatDateTime(
+          sameOfPrevMonth(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2025-09-10 10:01:01',
+      );
+      expect(
+        formatDateTime(
+          sameOfPrevYear(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2024-10-10 10:01:01',
+      );
+
+      // 测试用例 2: 3月31日 -> 2月无31日，应返回2月最后一天
+      ts = DateTime.parse('2025-03-31 10:01:01').millisecondsSinceEpoch;
+
+      expect(
+        formatDateTime(
+          sameOfPrevDay(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2025-03-30 10:01:01',
+      );
+      expect(
+        formatDateTime(
+          sameOfPrevWeek(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2025-03-24 10:01:01',
+      );
+      expect(
+        formatDateTime(
+          sameOfPrevMonth(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2025-02-28 23:59:59',
+      );
+      expect(
+        formatDateTime(
+          sameOfPrevYear(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2024-03-31 10:01:01',
+      );
+
+      // 测试用例 3: 闰年2月29日 -> 去年无2月29日
+      ts = DateTime.parse('2024-02-29 10:01:01').millisecondsSinceEpoch;
+
+      expect(
+        formatDateTime(
+          sameOfPrevDay(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2024-02-28 10:01:01',
+      );
+      expect(
+        formatDateTime(
+          sameOfPrevWeek(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2024-02-22 10:01:01',
+      );
+      expect(
+        formatDateTime(
+          sameOfPrevMonth(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2024-01-29 10:01:01',
+      );
+      expect(
+        formatDateTime(
+          sameOfPrevYear(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2023-02-28 23:59:59',
+      );
+
+      // 测试用例 4: 闰年3月31日 -> 上个月是2月有29日
+      ts = DateTime.parse('2024-03-31 10:01:01').millisecondsSinceEpoch;
+
+      expect(
+        formatDateTime(
+          sameOfPrevDay(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2024-03-30 10:01:01',
+      );
+      expect(
+        formatDateTime(
+          sameOfPrevWeek(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2024-03-24 10:01:01',
+      );
+      expect(
+        formatDateTime(
+          sameOfPrevMonth(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2024-02-29 23:59:59',
+      );
+      expect(
+        formatDateTime(
+          sameOfPrevYear(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2023-03-31 10:01:01',
+      );
+
+      // 测试用例 5: 1月31日 -> 上个月是去年12月
+      ts = DateTime.parse('2024-01-31 10:01:01').millisecondsSinceEpoch;
+
+      expect(
+        formatDateTime(
+          sameOfPrevDay(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2024-01-30 10:01:01',
+      );
+      expect(
+        formatDateTime(
+          sameOfPrevWeek(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2024-01-24 10:01:01',
+      );
+      expect(
+        formatDateTime(
+          sameOfPrevMonth(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2023-12-31 10:01:01',
+      );
+      expect(
+        formatDateTime(
+          sameOfPrevYear(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2023-01-31 10:01:01',
+      );
+
+    });
+
     test('time_range_optimize', () {
       // isHour
       var date = DateTime.utc(2025, 2, 10, 10, 1, 1);
