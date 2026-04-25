@@ -337,6 +337,7 @@ void main() {
       expect(hasSpecialCharacter('a/b'), false);
       expect(hasSpecialCharacter('a*b'), false);
       expect(hasSpecialCharacter('茶π'), false);
+      expect(hasSpecialCharacter('𰻝𰻝面'), false);
     });
 
     test('removeSpecialCharacter', () {
@@ -350,6 +351,7 @@ void main() {
       expect(removeSpecialCharacter(' abc,  123. '), ' abc,  123. ');
       expect(removeSpecialCharacter(' +-*/ '), ' +-*/ ');
       expect(removeSpecialCharacter(' 茶π '), ' 茶π ');
+      expect(removeSpecialCharacter(' 𰻝𰻝面 '), ' 𰻝𰻝面 ');
     });
   });
 
