@@ -13,6 +13,7 @@ export 'src/constant/phone_number.dart';
 export 'src/constant/random_charset.dart';
 export 'src/constant/shelf_life.dart';
 export 'src/constant/size.dart';
+export 'src/constant/time.dart';
 
 export 'src/convert/discount.dart';
 export 'src/convert/distance.dart';
@@ -39,6 +40,7 @@ export 'src/format/money.dart';
 export 'src/format/rate.dart';
 export 'src/format/shelf_life.dart';
 export 'src/format/size.dart';
+export 'src/format/time.dart';
 export 'src/format/week.dart';
 
 export 'src/is/bank_card_number.dart';

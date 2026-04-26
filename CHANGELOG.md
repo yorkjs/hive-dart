@@ -107,3 +107,4 @@
 - 新增 isLocationInChina, isHexColor
 - 新增 startOfYear, startOfPrevYear, startOfNextYear, endOfYear
 - 新增 sameOfPrevDay, sameOfPrevWeek, sameOfPrevMonth, sameOfPrevYear
+- 新增 formatTime

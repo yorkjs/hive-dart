@@ -164,6 +164,10 @@ void main() {
       expect(formatYear(DateTime.parse('2020-10-01 00:00:00').millisecondsSinceEpoch), '2020');
     });
 
+    test('formatTime', () {
+      expect(formatTime(DateTime.parse('2020-10-01 01:02:03').millisecondsSinceEpoch), '01:02:03');
+    });
+
     test('formatMonth', () {
       expect(formatMonth(DateTime.parse('2020-10-01 00:00:00').millisecondsSinceEpoch), '2020-10');
     });
