@@ -165,41 +165,29 @@ int endOfMonth(int timestamp) {
 
 
 /// 获取某年的开始时间
-///
-/// @param timestampMs 毫秒时间戳
-/// @returns 毫秒时间戳
-int startOfYear(int timestampMs) {
-  final date = DateTime.fromMillisecondsSinceEpoch(timestampMs);
+int startOfYear(int timestamp) {
+  final date = DateTime.fromMillisecondsSinceEpoch(timestamp);
   final result = DateTime(date.year, 1, 1, 0, 0, 0, 0);
   return result.millisecondsSinceEpoch;
 }
 
 /// 获取前一年的开始时间
-///
-/// @param timestampMs 毫秒时间戳
-/// @returns 毫秒时间戳
-int startOfPrevYear(int timestampMs) {
-  final date = DateTime.fromMillisecondsSinceEpoch(timestampMs);
+int startOfPrevYear(int timestamp) {
+  final date = DateTime.fromMillisecondsSinceEpoch(timestamp);
   final result = DateTime(date.year - 1, 1, 1, 0, 0, 0, 0);
   return result.millisecondsSinceEpoch;
 }
 
 /// 获取下一年的开始时间
-///
-/// @param timestampMs 毫秒时间戳
-/// @returns 毫秒时间戳
-int startOfNextYear(int timestampMs) {
-  final date = DateTime.fromMillisecondsSinceEpoch(timestampMs);
+int startOfNextYear(int timestamp) {
+  final date = DateTime.fromMillisecondsSinceEpoch(timestamp);
   final result = DateTime(date.year + 1, 1, 1, 0, 0, 0, 0);
   return result.millisecondsSinceEpoch;
 }
 
 /// 获取某年的结束时间
-///
-/// @param timestampMs 毫秒时间戳
-/// @returns 毫秒时间戳
-int endOfYear(int timestampMs) {
-  final date = DateTime.fromMillisecondsSinceEpoch(timestampMs);
+int endOfYear(int timestamp) {
+  final date = DateTime.fromMillisecondsSinceEpoch(timestamp);
   final result = DateTime(date.year, 12, 31, 23, 59, 59, 999);
   return result.millisecondsSinceEpoch;
 }
@@ -210,9 +198,6 @@ int sameOfPrevDay(int timestamp) {
 }
 
 /// 获取前一周的同时刻
-///
-/// @param timestamp 毫秒时间戳
-/// @returns 毫秒时间戳
 int sameOfPrevWeek(int timestamp) {
   return timestamp - MS_WEEK;
 }
@@ -221,7 +206,7 @@ int sameOfPrevWeek(int timestamp) {
 int sameOfPrevMonth(int timestampMs) {
   final date = DateTime.fromMillisecondsSinceEpoch(timestampMs);
   final year = date.year;
-  final month = date.month; // 1‑based
+  final month = date.month;
   final day = date.day;
 
   // 上个月第一天
@@ -251,16 +236,11 @@ int sameOfPrevMonth(int timestampMs) {
 /// 获取去年的同时刻
 int sameOfPrevYear(int timestampMs) {
   final date = DateTime.fromMillisecondsSinceEpoch(timestampMs);
-  final month = date.month; // 1‑based
+  final month = date.month;
   final day = date.day;
 
-  final prevYear = date.year - 1;
-
-  // 去年同月第一天
-  final prevYearMonthStart = DateTime(prevYear, month, 1, 0, 0, 0, 0);
-
   // 去年同月最后一天（下个月第 0 天）
-  final prevYearMonthEnd = DateTime(prevYear, month + 1, 0, 23, 59, 59, 999);
+  final prevYearMonthEnd = DateTime(date.year - 1, month + 1, 0, 23, 59, 59, 999);
 
   if (day > prevYearMonthEnd.day) {
     return prevYearMonthEnd.millisecondsSinceEpoch;
@@ -268,7 +248,7 @@ int sameOfPrevYear(int timestampMs) {
 
   // 构建去年同时刻
   final result = DateTime(
-    prevYear,
+    date.year - 1,
     month,
     day,
     date.hour,
