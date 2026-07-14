@@ -14,6 +14,7 @@ export 'src/constant/random_charset.dart';
 export 'src/constant/shelf_life.dart';
 export 'src/constant/size.dart';
 export 'src/constant/time.dart';
+export 'src/constant/week.dart';
 
 export 'src/convert/discount.dart';
 export 'src/convert/distance.dart';
