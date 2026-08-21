@@ -43,7 +43,8 @@ void main() {
       expect(isCorporateAccountNumber(''), false);
       expect(isCorporateAccountNumber('1'), false);
       expect(isCorporateAccountNumber('12'), false);
-      expect(isCorporateAccountNumber('6228480012123123123123123345678'), false);
+      expect(isCorporateAccountNumber('6228480012123123123123123345678'), true);
+      expect(isCorporateAccountNumber('62284800121231231231231233456789222222222222'), false);
       expect(isCorporateAccountNumber('1234567890123'), true);
       expect(isCorporateAccountNumber('asdasdasdasd'), false);
 

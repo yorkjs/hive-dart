@@ -51,3 +51,8 @@ int timeToTimestamp(DateTime t) {
 DateTime timestampToTime(int timestamp) {
   return DateTime.fromMillisecondsSinceEpoch(timestamp);
 }
+
+/// 时间对象转成分钟段（当天从 0 点开始的分钟数，0~1439）
+int timeToMinuteSegment(DateTime t) {
+  return t.hour * 60 + t.minute;
+}

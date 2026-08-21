@@ -79,5 +79,12 @@ void main() {
       expect(timeToTimestamp(DateTime.fromMillisecondsSinceEpoch(0)), 0);
       expect(timeToTimestamp(timestampToTime(0)), 0);
     });
+
+    test('timeToMinuteSegment', () {
+      // 使用 DateTime 构造函数避免字符串解析格式问题
+      expect(timeToMinuteSegment(DateTime(2025, 5, 5, 0, 0, 0)), equals(0));
+      expect(timeToMinuteSegment(DateTime(2025, 5, 5, 10, 1, 0)), equals(601));
+      expect(timeToMinuteSegment(DateTime(2025, 5, 5, 23, 59, 59)), equals(1439));
+    });
   });
 }

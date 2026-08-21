@@ -284,12 +284,13 @@ void main() {
       expect(formatDuration(MS_DAY), '1天');
     });
 
-    test('formatBusinessTimes', () {
-      expect(formatBusinessTimes([]), '');
-      expect(formatBusinessTimes([0]), '');
-      expect(formatBusinessTimes([0, 1440]), '全天');
-      expect(formatBusinessTimes([0, 1440, 1440, 2880]), '全天、全天');
-      expect(formatBusinessTimes([540, 960, 1200, 1560]), '09:00-16:00、20:00-次日02:00');
+    test('formatMinuteSegments', () {
+      expect(formatMinuteSegments([]), equals(''));
+      expect(formatMinuteSegments([0]), equals(''));
+      expect(formatMinuteSegments([0, 1440]), equals('全天'));
+      expect(formatMinuteSegments([0, 1440, 1440, 2880]), equals('全天、全天'));
+      expect(formatMinuteSegments([540, 960, 1200, 1560]), equals('09:00-16:00、20:00-次日02:00'));
+      expect(formatMinuteSegments([540, 960, 1200, 1560], separator: '+'), equals('09:00-16:00+20:00-次日02:00'));
     });
   });
 }

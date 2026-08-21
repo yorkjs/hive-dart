@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import '../convert/time.dart';
 import '../constant/millisecond.dart';
 
 /// 时间戳转成时间对象
@@ -258,6 +259,32 @@ int sameOfPrevYear(int timestampMs) {
   );
 
   return result.millisecondsSinceEpoch;
+}
+
+/// 判断目标时间是否落在给定的分钟段区间内（左闭右开）
+bool matchMinuteSegments(List<int> segments, DateTime target) {
+  final length = segments.length;
+  if (length == 0 || length % 2 != 0) {
+    return false;
+  }
+
+  // 当日分钟段
+  final firstValue = timeToMinuteSegment(target);
+  // 次日分钟段
+  final secondValue = firstValue + 24 * 60;
+
+  for (int i = 0; i < length; i += 2) {
+    final startTime = segments[i];
+    final endTime = segments[i + 1];
+    if (firstValue >= startTime && firstValue < endTime) {
+      return true;
+    }
+    if (secondValue >= startTime && secondValue < endTime) {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 class ITimeRangeOptimizer {

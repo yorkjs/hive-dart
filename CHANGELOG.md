@@ -108,3 +108,9 @@
 - 新增 startOfYear, startOfPrevYear, startOfNextYear, endOfYear
 - 新增 sameOfPrevDay, sameOfPrevWeek, sameOfPrevMonth, sameOfPrevYear
 - 新增 formatTime
+
+## 0.2.5
+
+1. 修改 formatBusinessTimes 函数名为 formatMinuteSegments
+2. 新增 timeToMinuteSegment、matchMinuteSegments 函数
+3. 新增周一到周日的常量

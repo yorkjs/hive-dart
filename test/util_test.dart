@@ -1066,6 +1066,20 @@ void main() {
 
     });
 
+    test('minute_segments', () {
+      // 用例1：2025-10-10 10:01:01
+      DateTime date1 = DateTime(2025, 10, 10, 10, 1, 1);
+      expect(matchMinuteSegments([500, 650], date1), isTrue);
+      expect(matchMinuteSegments([500, 550], date1), isFalse);
+      expect(matchMinuteSegments([650, 700], date1), isFalse);
+
+      // 用例2：2025-03-31 01:01:01
+      DateTime date2 = DateTime(2025, 3, 31, 1, 1, 1);
+      expect(matchMinuteSegments([1320, 1560], date2), isTrue);
+      expect(matchMinuteSegments([1320, 1440], date2), isFalse);
+      expect(matchMinuteSegments([1560, 1600], date2), isFalse);
+    });
+
     test('time_range_optimize', () {
       // isHour
       var date = DateTime.utc(2025, 2, 10, 10, 1, 1);

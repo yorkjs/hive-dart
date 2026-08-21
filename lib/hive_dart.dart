@@ -26,7 +26,7 @@ export 'src/convert/weight.dart';
 export 'src/format/area.dart';
 export 'src/format/birthday.dart';
 export 'src/format/bank_card.dart';
-export 'src/format/business_time.dart';
+export 'src/format/minute_segments.dart';
 export 'src/format/category.dart';
 export 'src/format/count.dart';
 export 'src/format/discount.dart';
