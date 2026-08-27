@@ -114,3 +114,8 @@
 1. 修改 formatBusinessTimes 函数名为 formatMinuteSegments
 2. 新增 timeToMinuteSegment、matchMinuteSegments 函数
 3. 新增周一到周日的常量
+
+## 0.2.6
+
+1. 新增 calculateSmsCount
+2. 修改 renderStringTemplate 方法签名，第二个参数改成 replace 函数

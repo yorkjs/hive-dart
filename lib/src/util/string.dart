@@ -2,7 +2,7 @@
 ///
 /// 注意：中文和英文都算 1 个字符
 int getStringLength(String str) {
-  return str.length;
+  return str.runes.length;
 }
 
 /// 获取字符串宽度，此函数常用于排版辅助计算
@@ -51,18 +51,15 @@ String truncateString(String str, int maxLength) {
 /// 渲染字符串模板
 ///
 /// [str] 字符串模板，例如：'你好，${name}'
-/// [data] 数据对象，例如：{'name': '张三'}
+/// [replace] 回调函数，参数为提取的 key 和完整匹配项，返回替换后的内容
 /// 返回渲染后的字符串，例如：'你好，张三'
-String renderStringTemplate(String str, Map<String, dynamic> data) {
-  final RegExp regex = RegExp(r'\${(.*?)}');
-
-  return str.replaceAllMapped(regex, (match) {
-    // 获取变量名并去除两端空白
-    final key = match.group(1)?.trim() ?? '';
-    // 获取对应的值
-    final value = data[key];
-    // 如果找不到对应的值，返回原占位符
-    return value != null ? value.toString() : match.group(0)!;
+String renderStringTemplate(String str, String Function(String key, String match) replace) {
+  final pattern = RegExp(r'\${(.*?)}');
+  return str.replaceAllMapped(pattern, (match) {
+    // 提取捕获组（key）
+    final key = match.group(1)!;
+    // 去除 key 两端的空白
+    return replace(trimString(key), match[0]!);
   });
 }
 

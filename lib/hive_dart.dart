@@ -72,6 +72,7 @@ export 'src/util/distance.dart';
 export 'src/util/number.dart';
 export 'src/util/random.dart';
 export 'src/util/rate.dart';
+export 'src/util/sms.dart';
 export 'src/util/string.dart';
 export 'src/util/time.dart';
 export 'src/util/url.dart';

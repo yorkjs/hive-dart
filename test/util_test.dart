@@ -278,47 +278,83 @@ void main() {
       expect(truncateString("你是谁你在干ABC想吃什么", 9), '你是谁你在干...');
     });
     test('renderStringTemplate', () {
+
+      String Function(String, String) replaceWithMap(Map<String, dynamic> map) {
+        return (key, match) {
+          if (map.containsKey(key)) {
+            final value = map[key];
+            // 值为 null 时不替换，保留原占位符
+            if (value == null) return match;
+            return value.toString();
+          }
+          return match;
+        };
+      }
+      // 原：renderStringTemplate('你好，${name}', {'name': '张三'})
       expect(
-        renderStringTemplate('你好，\${name}', {'name': '张三'}),
+        renderStringTemplate('你好，\${name}', replaceWithMap({'name': '张三'})),
         equals('你好，张三'),
       );
+
+      // 原：renderStringTemplate('你好，${name1}，${name2}', { 'name1': '张三', 'name2': '李四' })
       expect(
-        renderStringTemplate('你好，\${name1}，\${name2}', {
-          'name1': '张三',
-          'name2': '李四',
-        }),
+        renderStringTemplate(
+          '你好，\${name1}，\${name2}',
+          replaceWithMap({'name1': '张三', 'name2': '李四'}),
+        ),
         equals('你好，张三，李四'),
       );
+
+      // 原：renderStringTemplate('你好，${name1}，${name3}。', {'name1': '张三'})
       expect(
-        renderStringTemplate('你好，\${name1}，\${name3}。', {'name1': '张三'}),
+        renderStringTemplate(
+          '你好，\${name1}，\${name3}。',
+          replaceWithMap({'name1': '张三'}),
+        ),
         equals('你好，张三，\${name3}。'),
       );
+
+      // 原：renderStringTemplate('你好，${value}。', {'value': 10})
       expect(
-        renderStringTemplate('你好，\${value}。', {'value': 10}),
+        renderStringTemplate('你好，\${value}。', replaceWithMap({'value': 10})),
         equals('你好，10。'),
       );
+
+      // 原：renderStringTemplate('你好，${value}。', {'value': 10.11})
       expect(
-        renderStringTemplate('你好，\${value}。', {'value': 10.11}),
+        renderStringTemplate('你好，\${value}。', replaceWithMap({'value': 10.11})),
         equals('你好，10.11。'),
       );
+
+      // 原：renderStringTemplate('你好，${value}。', {'value': true})
       expect(
-        renderStringTemplate('你好，\${value}。', {'value': true}),
+        renderStringTemplate('你好，\${value}。', replaceWithMap({'value': true})),
         equals('你好，true。'),
       );
+
+      // 原：renderStringTemplate('你好，${value}。', {'value': false})
       expect(
-        renderStringTemplate('你好，\${value}。', {'value': false}),
+        renderStringTemplate('你好，\${value}。', replaceWithMap({'value': false})),
         equals('你好，false。'),
       );
+
+      // 原：renderStringTemplate('你好，${value}。', {'value': null})
+      // 这里 null 应保留原占位符
       expect(
-        renderStringTemplate('你好，\${value}。', {'value': null}),
+        renderStringTemplate('你好，\${value}。', replaceWithMap({'value': null})),
         equals('你好，\${value}。'),
       );
+
+      // 原：renderStringTemplate('值：${int}，${double}，${negative}', { ... })
       expect(
-        renderStringTemplate('值：\${int}，\${double}，\${negative}', {
-          'int': 42,
-          'double': 3.14159,
-          'negative': -100,
-        }),
+        renderStringTemplate(
+          '值：\${int}，\${double}，\${negative}',
+          replaceWithMap({
+            'int': 42,
+            'double': 3.14159,
+            'negative': -100,
+          }),
+        ),
         equals('值：42，3.14159，-100'),
       );
     });
@@ -1377,6 +1413,101 @@ void main() {
       expect(isWeek, false);
       expect(isMonth, true);
       expect(isRange, false);
+    });
+  });
+
+  group('calculateSmsCount', () {
+    test('模板内容为空，应返回 0 个字符、0 条短信', () {
+      expect(
+        calculateSmsCount('', '', 70),
+        equals([0, 0]),
+      );
+    });
+
+    test('正常计算短信条数', () {
+      expect(
+        calculateSmsCount('', '你好', 70),
+        equals([2, 1]),
+      );
+
+      expect(
+        calculateSmsCount('', '你好' * 35, 70),
+        equals([70, 1]),
+      );
+
+      expect(
+        calculateSmsCount('', '你好' * 36, 70),
+        equals([72, 2]),
+      );
+    });
+
+    test('应该计算签名长度，并包含【】两个字符', () {
+      expect(
+        calculateSmsCount('测试', '你好', 70),
+        equals([6, 1]),
+      );
+    });
+
+    test('字符数刚好达到单条短信上限', () {
+      expect(
+        calculateSmsCount('', 'a' * 70, 70),
+        equals([70, 1]),
+      );
+    });
+
+    test('超过单条短信上限后应增加短信条数', () {
+      expect(
+        calculateSmsCount('', 'a' * 71, 70),
+        equals([71, 2]),
+      );
+
+      expect(
+        calculateSmsCount('', 'a' * 140, 70),
+        equals([140, 2]),
+      );
+
+      expect(
+        calculateSmsCount('', 'a' * 141, 70),
+        equals([141, 3]),
+      );
+    });
+
+    test('perSmsCharCount 小于等于 0，应返回 0 条短信', () {
+      expect(
+        calculateSmsCount('', '你好', 0),
+        equals([2, 0]),
+      );
+
+      expect(
+        calculateSmsCount('', '你好', -1),
+        equals([2, 0]),
+      );
+    });
+
+    test('应正确处理中文、英文混合内容', () {
+      expect(
+        calculateSmsCount('', 'Hello你好123', 70),
+        equals([10, 1]),
+      );
+    });
+
+    test('应正确处理 Unicode 字符', () {
+      expect(
+        calculateSmsCount('', '😀😀', 70),
+        equals([2, 1]),
+      );
+    });
+
+    test('支持自定义每条短信字符数', () {
+      expect(
+        calculateSmsCount('', 'abcdefghij', 5),
+        equals([10, 2]),
+      );
+
+      expect(
+        calculateSmsCount('', 'abcdefghijk', 5),
+        equals([11, 3]),
+      );
     });
   });
 
