@@ -13,6 +13,43 @@ DateTime? parseTime(String str, String format) {
 }
 
 
+/// 获取某个分钟的开始时间
+int startOfMinute(int timestamp) {
+  final date = DateTime.fromMillisecondsSinceEpoch(timestamp);
+  return DateTime(
+    date.year,
+    date.month,
+    date.day,
+    date.hour,
+    date.minute,
+    // second, millisecond, microsecond 默认均为 0
+  ).millisecondsSinceEpoch;
+}
+
+/// 获取前一分钟的开始时间
+int startOfPrevMinute(int timestamp) {
+  return startOfMinute(timestamp - MS_MINUTE);
+}
+
+/// 获取下一分钟的开始时间
+int startOfNextMinute(int timestamp) {
+  return startOfMinute(timestamp + MS_MINUTE);
+}
+
+/// 获取某个分钟的结束时间
+int endOfMinute(int timestamp) {
+  final date = DateTime.fromMillisecondsSinceEpoch(timestamp);
+  return DateTime(
+    date.year,
+    date.month,
+    date.day,
+    date.hour,
+    date.minute,
+    59,
+    999,
+  ).millisecondsSinceEpoch;
+}
+
 /// 获取某个小时开始时间
 int startOfHour(int timestamp) {
   final date = DateTime.fromMillisecondsSinceEpoch(timestamp);

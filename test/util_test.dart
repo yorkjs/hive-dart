@@ -499,6 +499,38 @@ void main() {
         '2020-10-01',
       );
     });
+    test('minute', () {
+      var ts = DateTime.parse('2020-10-10 10:01:01').millisecondsSinceEpoch;
+
+      expect(
+        formatDateTime(
+          startOfMinute(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2020-10-10 10:01:00',
+      );
+      expect(
+        formatDateTime(
+          startOfPrevMinute(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2020-10-10 10:00:00',
+      );
+      expect(
+        formatDateTime(
+          startOfNextMinute(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2020-10-10 10:02:00',
+      );
+      expect(
+        formatDateTime(
+          endOfMinute(ts),
+          format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE_SECOND,
+        ),
+        '2020-10-10 10:01:59',
+      );
+    });
     test('hour', () {
       var ts = DateTime.parse('2020-10-10 10:01:01').millisecondsSinceEpoch;
 

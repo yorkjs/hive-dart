@@ -119,3 +119,7 @@
 
 1. 新增 calculateSmsCount
 2. 修改 renderStringTemplate 方法签名，第二个参数改成 replace 函数
+
+## 0.2.7
+
+1. 新增 startOfMinute, startOfPrevMinute, startOfNextMinute, endOfMinute
