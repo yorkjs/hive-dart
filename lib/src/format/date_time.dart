@@ -1,5 +1,8 @@
 import 'package:intl/intl.dart';
 import '../constant/date_time.dart';
+import '../constant/time.dart';
+import './date.dart';
+import './time.dart';
 
 /// 把时间戳格式化为 2020-10-01 10:00 格式
 String formatDateTime(int timestamp, {String format = DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE}) {
@@ -9,6 +12,9 @@ String formatDateTime(int timestamp, {String format = DATE_TIME_YEAR_MONTH_DATE_
 
 /// 把时间戳格式化为 2020-10-01 10:00 至 2020-10-02 10:00 格式
 String formatDateTimeRange(int startTimestamp, int endTimestamp) {
+  if (formatDate(startTimestamp) == formatDate(endTimestamp)) {
+    return '${formatDateTime(startTimestamp, format: DATE_TIME_YEAR_MONTH_DATE_HOUR_MINUTE)} 至 ${formatTime(endTimestamp, format: TIME_HOUR_MINUTE)}';
+  }
   return '${formatDateTime(startTimestamp)} 至 ${formatDateTime(endTimestamp)}';
 }
 

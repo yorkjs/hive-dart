@@ -6,13 +6,13 @@ String formatDuration(int value) {
   final data = normalizeDuration(value);
 
   if (data.days > 0) {
-    result.add('${data.days}天');
+    result.add('${data.days}日');
   }
   if (data.hours > 0) {
-    result.add('${data.hours}小时');
+    result.add('${data.hours}时');
   }
   if (data.minutes > 0) {
-    result.add('${data.minutes}分钟');
+    result.add('${data.minutes}分');
   }
   if (data.seconds > 0) {
     result.add('${data.seconds}秒');

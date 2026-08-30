@@ -123,3 +123,4 @@
 ## 0.2.7
 
 1. 新增 startOfMinute, startOfPrevMinute, startOfNextMinute, endOfMinute
+2. 修改 formatDateTimeRange、formatDuration 内部实现

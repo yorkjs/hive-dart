@@ -158,6 +158,11 @@ void main() {
         DateTime.parse('2020-10-01 00:00:00').millisecondsSinceEpoch,
         DateTime.parse('2020-10-02 08:10:00').millisecondsSinceEpoch
       ), '2020-10-01 00:00 至 2020-10-02 08:10');
+
+      expect(formatDateTimeRange(
+        DateTime.parse('2020-10-01 00:00:00').millisecondsSinceEpoch,
+        DateTime.parse('2020-10-01 08:10:00').millisecondsSinceEpoch
+      ), '2020-10-01 00:00 至 08:10');
     });
 
     test('formatYear', () {
@@ -279,9 +284,9 @@ void main() {
     test('formatDuration', () {
       expect(formatDuration(0), '');
       expect(formatDuration(MS_SECOND), '1秒');
-      expect(formatDuration(MS_MINUTE), '1分钟');
-      expect(formatDuration(MS_HOUR), '1小时');
-      expect(formatDuration(MS_DAY), '1天');
+      expect(formatDuration(MS_MINUTE), '1分');
+      expect(formatDuration(MS_HOUR), '1时');
+      expect(formatDuration(MS_DAY), '1日');
     });
 
     test('formatMinuteSegments', () {
