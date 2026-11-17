@@ -35,6 +35,38 @@ void main() {
       expect(rateToBackend(10.15), 1015);
     });
 
+    test('convertSize', () {
+      // 字节 → KB（1024 进制），正向换算用 closeTo，覆盖到 2 位小数
+      expect(sizeToKB(1024), closeTo(1, 0.01));
+      expect(sizeToKB(2048), closeTo(2, 0.01));
+      expect(sizeToKB(10240), closeTo(10, 0.01));
+      expect(sizeToKB(1048576), closeTo(1024, 0.01));
+
+      // 字节 → MB
+      expect(sizeToMB(1048576), closeTo(1, 0.01));
+      expect(sizeToMB(2097152), closeTo(2, 0.01));
+      expect(sizeToMB(10485760), closeTo(10, 0.01));
+      expect(sizeToMB(1073741824), closeTo(1024, 0.01));
+
+      // 字节 → GB
+      expect(sizeToGB(1073741824), closeTo(1, 0.01));
+      expect(sizeToGB(2147483648), closeTo(2, 0.01));
+      expect(sizeToGB(10737418240), closeTo(10, 0.01));
+
+      // 前端 → 后端字节（整数，严格比）
+      expect(sizeKBToBackend(1), equals(1024));
+      expect(sizeKBToBackend(10), equals(10240));
+      expect(sizeKBToBackend(100), equals(102400));
+
+      expect(sizeMBToBackend(1), equals(1048576));
+      expect(sizeMBToBackend(10), equals(10485760));
+      expect(sizeMBToBackend(100), equals(104857600));
+
+      expect(sizeGBToBackend(1), equals(1073741824));
+      expect(sizeGBToBackend(10), equals(10737418240));
+      expect(sizeGBToBackend(100), equals(107374182400));
+    });
+
     test('convertWeight', () {
       expect(weightToG(1), 0.001);
       expect(weightToG(10), 0.01);
